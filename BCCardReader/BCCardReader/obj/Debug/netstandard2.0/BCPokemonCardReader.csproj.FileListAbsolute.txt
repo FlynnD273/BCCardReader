@@ -1,0 +1,14 @@
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.csprojAssemblyReference.cache
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\bin\Debug\netstandard2.0\BCPokemonCardReader.deps.json
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\bin\Debug\netstandard2.0\BCPokemonCardReader.dll
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\bin\Debug\netstandard2.0\ref\BCPokemonCardReader.dll
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\bin\Debug\netstandard2.0\BCPokemonCardReader.pdb
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.AssemblyInfoInputs.cache
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.AssemblyInfo.cs
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.csproj.CoreCompileInputs.cache
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.dll
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\ref\BCPokemonCardReader.dll
+C:\Users\Flynn\Documents\Visual Studio 2019\Projects\BCPokemonCardReader\BCPokemonCardReader\BCPokemonCardReader\obj\Debug\netstandard2.0\BCPokemonCardReader.pdb
