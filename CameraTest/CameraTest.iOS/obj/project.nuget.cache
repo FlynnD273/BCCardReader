@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "g9fvEEP6U+eaznOEFFRL58V0Mjq5G40CDJeXm9AKBNX2ocyb50K8ryGdzEXYT36I2wK7W/8gkcdcVMx1N0QyqQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\CameraTest\\CameraTest.iOS\\CameraTest.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Flynn\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
+  ],
+  "logs": []
+}

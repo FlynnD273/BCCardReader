@@ -494,3 +494,5 @@ C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug
 C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug\90\android\src\crc64a0e0a82d0db9a07d\IntermediateActivity.java
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld.Android\obj\Debug\90\android\src\crc64a0e0a82d0db9a07d\WebAuthenticatorIntermediateActivity.java

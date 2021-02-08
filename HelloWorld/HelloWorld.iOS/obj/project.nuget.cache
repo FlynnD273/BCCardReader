@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "wu7WB+lML1RrWlZB0SkU101Q8yArT7XS5ooO/My2e9MMiYcEfVpP+0rNvZb7ndsYTGyZs6UIi8dWlrQ+kSeIVw==",
+  "dgSpecHash": "qbsyqS1cqHxdoO7HyZQ6zkAWj6Qgs9Rx6XCjHbjmtE5Q4x4GUwGFIhT3ETgktBhXVp3uQUBJQPULQqurkQuugQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\HelloWorld\\HelloWorld.iOS\\HelloWorld.iOS.csproj",
   "expectedPackageFiles": [
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
   ],
   "logs": []

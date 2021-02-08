@@ -12,6 +12,3 @@ C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\obj\Debug\net
 C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.dll
 C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\ref\BCCardReader.dll
 C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.pdb
-C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\Utils.dll
-C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\Utils.pdb
-C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.csproj.CopyComplete
