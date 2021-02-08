@@ -1,0 +1,17 @@
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\HelloWorld.deps.json
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\HelloWorld.dll
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\ref\HelloWorld.dll
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\HelloWorld.pdb
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\Utils.dll
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\bin\Debug\netstandard2.0\Utils.pdb
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.csprojAssemblyReference.cache
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.AssemblyInfoInputs.cache
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.AssemblyInfo.cs
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.csproj.CoreCompileInputs.cache
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.csproj.CopyComplete
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.dll
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\ref\HelloWorld.dll
+C:\Users\Flynn\source\repos\BCCardReader\HelloWorld\HelloWorld\obj\Debug\netstandard2.0\HelloWorld.pdb

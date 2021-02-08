@@ -788,6 +788,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Utils": "1.0.0",
           "Xamarin.Essentials": "1.5.3.2",
           "Xamarin.Forms": "4.8.0.1451"
         },
@@ -796,6 +797,16 @@
         },
         "runtime": {
           "bin/placeholder/BCCardReader.dll": {}
+        }
+      },
+      "Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utils.dll": {}
         }
       }
     }
@@ -1923,6 +1934,11 @@
       "type": "project",
       "path": "../BCCardReader/BCCardReader.csproj",
       "msbuildProject": "../BCCardReader/BCCardReader.csproj"
+    },
+    "Utils/1.0.0": {
+      "type": "project",
+      "path": "../../Utils/Utils.csproj",
+      "msbuildProject": "../../Utils/Utils.csproj"
     }
   },
   "projectFileDependencyGroups": {

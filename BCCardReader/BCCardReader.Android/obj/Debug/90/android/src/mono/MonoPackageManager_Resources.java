@@ -3,6 +3,7 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "BCCardReader.Android.dll" comes first in this list. */
 		"BCCardReader.Android.dll",
+		"Utils.dll",
 		"BCCardReader.dll",
 		"FormsViewGroup.dll",
 		"Xamarin.Android.Arch.Core.Common.dll",
