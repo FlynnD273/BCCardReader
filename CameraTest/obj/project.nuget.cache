@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "520lAIMwdIrz405h6fHkxXbIBUtYEDWnNQoiPSD0ryXljEz9Ks9xlbeuoSS36OZvEFwiqheghCJ6pV3NpBOo1A==",
+  "dgSpecHash": "1YG7DR1qcLwuFLu+0cl67X2BW9zgLn4p8ArCbOkyIQ13Xdw8qpDb7IXisO4A03BYbYBAQtlDkq9znYFGGaAOLQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\CameraTest\\CameraTest.csproj",
   "expectedPackageFiles": [
@@ -8,8 +8,8 @@
     "C:\\Users\\Flynn\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
-    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
-    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.forms\\5.0.0.1931\\xamarin.forms.5.0.0.1931.nupkg.sha512"
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
   ],
   "logs": []
 }

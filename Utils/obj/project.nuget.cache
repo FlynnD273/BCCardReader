@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "wTVQeN373MeKIGXaja2WWRfYf3gxQ3moVZh0QWRTPvOSwxTY1ci/7MStpd1Jf9hmfXj4nTvfOLheeNc2BvM5zw==",
+  "dgSpecHash": "1HMz53E3FB2+E7BKzMHD97vfSENwWKN4rELzpyh3MDU7KYTgltwpKjT5Hjp2DCr0AtyGA0Hwzlt58M6NcCaP9g==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\Utils\\Utils.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Flynn\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
-    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.forms\\5.0.0.1931\\xamarin.forms.5.0.0.1931.nupkg.sha512"
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
+    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"
   ],
   "logs": []
 }

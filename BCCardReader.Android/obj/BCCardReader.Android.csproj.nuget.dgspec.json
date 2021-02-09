@@ -23,7 +23,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "monoandroid90"
+          "monoandroid10.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -31,7 +31,7 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "monoandroid90": {
+          "monoandroid10.0": {
             "projectReferences": {
               "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\BCCardReader\\BCCardReader.csproj": {
                 "projectPath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\BCCardReader\\BCCardReader.csproj"
@@ -41,7 +41,7 @@
         }
       },
       "frameworks": {
-        "monoandroid90": {
+        "monoandroid10.0": {
           "dependencies": {
             "Xamarin.Essentials": {
               "target": "Package",

@@ -157,8 +157,8 @@
         "dependencies": {
           "Utils": "1.0.0",
           "Xam.Plugin.Media": "5.0.1",
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/CameraTest.dll": {}
@@ -171,8 +171,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/Utils.dll": {}
@@ -338,8 +338,8 @@
         "dependencies": {
           "Utils": "1.0.0",
           "Xam.Plugin.Media": "5.0.1",
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/CameraTest.dll": {}
@@ -352,8 +352,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/Utils.dll": {}
@@ -519,8 +519,8 @@
         "dependencies": {
           "Utils": "1.0.0",
           "Xam.Plugin.Media": "5.0.1",
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/CameraTest.dll": {}
@@ -533,8 +533,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/Utils.dll": {}
@@ -700,8 +700,8 @@
         "dependencies": {
           "Utils": "1.0.0",
           "Xam.Plugin.Media": "5.0.1",
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/CameraTest.dll": {}
@@ -714,8 +714,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "Xamarin.Essentials": "1.6.1",
-          "Xamarin.Forms": "5.0.0.1931"
+          "Xamarin.Essentials": "1.5.3.2",
+          "Xamarin.Forms": "4.8.0.1451"
         },
         "compile": {
           "bin/placeholder/Utils.dll": {}
@@ -1223,59 +1223,5 @@
         "#import": []
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: Xamarin.Essentials from 1.6.1 to 1.5.3.2. Reference the package directly from the project to select a different version. \r\n CameraTest.iOS -> CameraTest -> Xamarin.Essentials (>= 1.6.1) \r\n CameraTest.iOS -> Xamarin.Essentials (>= 1.5.3.2)",
-      "libraryId": "Xamarin.Essentials",
-      "targetGraphs": [
-        "Xamarin.iOS,Version=v1.0",
-        "Xamarin.iOS,Version=v1.0/win",
-        "Xamarin.iOS,Version=v1.0/win-x64",
-        "Xamarin.iOS,Version=v1.0/win-x86"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: Xamarin.Forms from 5.0.0.1931 to 4.8.0.1451. Reference the package directly from the project to select a different version. \r\n CameraTest.iOS -> CameraTest -> Xamarin.Forms (>= 5.0.0.1931) \r\n CameraTest.iOS -> Xamarin.Forms (>= 4.8.0.1451)",
-      "libraryId": "Xamarin.Forms",
-      "targetGraphs": [
-        "Xamarin.iOS,Version=v1.0",
-        "Xamarin.iOS,Version=v1.0/win",
-        "Xamarin.iOS,Version=v1.0/win-x64",
-        "Xamarin.iOS,Version=v1.0/win-x86"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: Xamarin.Essentials from 1.6.1 to 1.5.3.2. Reference the package directly from the project to select a different version. \r\n CameraTest.iOS -> Utils -> Xamarin.Essentials (>= 1.6.1) \r\n CameraTest.iOS -> Xamarin.Essentials (>= 1.5.3.2)",
-      "libraryId": "Xamarin.Essentials",
-      "targetGraphs": [
-        "Xamarin.iOS,Version=v1.0",
-        "Xamarin.iOS,Version=v1.0/win",
-        "Xamarin.iOS,Version=v1.0/win-x64",
-        "Xamarin.iOS,Version=v1.0/win-x86"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: Xamarin.Forms from 5.0.0.1931 to 4.8.0.1451. Reference the package directly from the project to select a different version. \r\n CameraTest.iOS -> Utils -> Xamarin.Forms (>= 5.0.0.1931) \r\n CameraTest.iOS -> Xamarin.Forms (>= 4.8.0.1451)",
-      "libraryId": "Xamarin.Forms",
-      "targetGraphs": [
-        "Xamarin.iOS,Version=v1.0",
-        "Xamarin.iOS,Version=v1.0/win",
-        "Xamarin.iOS,Version=v1.0/win-x64",
-        "Xamarin.iOS,Version=v1.0/win-x86"
-      ]
-    }
-  ]
+  }
 }
