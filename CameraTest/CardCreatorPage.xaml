@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:c="clr-namespace:CameraTest.Converter"
+             x:Class="CameraTest.Model.CardCreatorPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<c:IntEnumConverter x:Key="IntEnum"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
+	<StackLayout Orientation="Vertical">
+		<Image Source="{Binding Image}"/>
+		<Entry Placeholder="Title" Text="{Binding Name}"/>
+		<Picker ItemsSource="{Binding CardType}" SelectedIndex="{Binding Type, Converter={StaticResource IntEnum}}"/>
+		<Button Text="Confirm" Command="{Binding ConfirmCommand}"/>
+	</StackLayout>
+</ContentPage>

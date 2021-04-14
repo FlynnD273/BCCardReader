@@ -6,9 +6,14 @@ public class MonoPackageManager_Resources {
 		"Utils.dll",
 		"CameraTest.dll",
 		"FormsViewGroup.dll",
+		"MR.Gestures.dll",
+		"OpenCvSharp.dll",
+		"OpenCvSharp.Extensions.dll",
 		"Plugin.Media.dll",
+		"SkiaSharp.dll",
 		"Xamarin.AndroidX.Activity.dll",
 		"Xamarin.AndroidX.Annotation.dll",
+		"Xamarin.AndroidX.Annotation.Experimental.dll",
 		"Xamarin.AndroidX.AppCompat.AppCompatResources.dll",
 		"Xamarin.AndroidX.AppCompat.dll",
 		"Xamarin.AndroidX.Arch.Core.Common.dll",
@@ -33,6 +38,7 @@ public class MonoPackageManager_Resources {
 		"Xamarin.AndroidX.Lifecycle.LiveData.dll",
 		"Xamarin.AndroidX.Lifecycle.Runtime.dll",
 		"Xamarin.AndroidX.Lifecycle.ViewModel.dll",
+		"Xamarin.AndroidX.Lifecycle.ViewModelSavedState.dll",
 		"Xamarin.AndroidX.Loader.dll",
 		"Xamarin.AndroidX.LocalBroadcastManager.dll",
 		"Xamarin.AndroidX.Media.dll",
@@ -47,14 +53,15 @@ public class MonoPackageManager_Resources {
 		"Xamarin.AndroidX.VectorDrawable.dll",
 		"Xamarin.AndroidX.VersionedParcelable.dll",
 		"Xamarin.AndroidX.ViewPager.dll",
+		"Xamarin.AndroidX.ViewPager2.dll",
 		"Xamarin.Essentials.dll",
 		"Xamarin.Forms.Core.dll",
 		"Xamarin.Forms.Platform.Android.dll",
 		"Xamarin.Forms.Platform.dll",
 		"Xamarin.Forms.Xaml.dll",
 		"Xamarin.Google.Android.Material.dll",
+		"Xamarin.Google.Guava.ListenableFuture.dll",
 	};
 	public static String[] Dependencies = new String[]{
 	};
-	public static String ApiPackageName = "Mono.Android.Platform.ApiLevel_29";
 }

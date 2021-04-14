@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CameraTest.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace CameraTest
         public MainPage()
         {
             InitializeComponent();
+
+            BindingContext = new CameraModel(Navigation, this);
         }
     }
 }

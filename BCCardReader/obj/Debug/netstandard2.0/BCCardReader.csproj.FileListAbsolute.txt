@@ -1,0 +1,14 @@
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\BCCardReader.deps.json
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\BCCardReader.dll
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\ref\BCCardReader.dll
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\bin\Debug\netstandard2.0\BCCardReader.pdb
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.csprojAssemblyReference.cache
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.AssemblyInfoInputs.cache
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.AssemblyInfo.cs
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.csproj.CoreCompileInputs.cache
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.dll
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\ref\BCCardReader.dll
+C:\Users\Flynn\source\repos\BCCardReader\BCCardReader\obj\Debug\netstandard2.0\BCCardReader.pdb

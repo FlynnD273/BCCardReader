@@ -2,24 +2,39 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CameraTest.MainPage"
+						 xmlns:l="clr-namespace:CameraTest"
 						 xmlns:m="clr-namespace:CameraTest.Model">
-	<ContentPage.BindingContext>
-		<m:CameraModel/>
-	</ContentPage.BindingContext>
-	
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<Image Source="{Binding CameraImage}" Grid.Row="0"/>
-		<Grid Grid.Row="1">
+		<!--<Image Source="{Binding CameraImage}" Grid.Row="0">
+			<Image.Effects>
+				<tt:TouchEffect Capture="True"
+                            TouchAction="OnTouchEffectAction" />
+			</Image.Effects>
+		</Image>-->
+		<!--<Grid Grid.
+		
+		Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Button Text="Take Photo" Command="{Binding TakeImageCommand}" Grid.Column="0"/>
 			<Button Text="Pick Photo" Command="{Binding PickImageCommand}" Grid.Column="1"/>
-		</Grid>
+		</Grid>-->
+
+		<ListView ItemsSource="{Binding CardData}">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<l:CardView/>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<Button Grid.Row="1" Text="Add Card" Command="{Binding CreateCardCommand}"/>
 	</Grid>
 </ContentPage>
