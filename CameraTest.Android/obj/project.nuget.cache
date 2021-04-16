@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FyXX6rlD6jgRuiB4Qg/ig+olDB9rGCyrsSfdJWh81u1JI4ssbyFULb9dWI1W057/0H1rlemvAZvY2OQUF8aOZg==",
+  "dgSpecHash": "IScdECReDxh/epjEp/MRhFKbJtxjJzW0iZ56Ch5hxwM4jEP+/m7ZngJ0sUWPPE4BGKzvbZotvZoWDo6b9ziHhw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\CameraTest.Android\\CameraTest.Android.csproj",
   "expectedPackageFiles": [
@@ -59,6 +59,8 @@
     "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.androidx.viewpager\\1.0.0.6\\xamarin.androidx.viewpager.1.0.0.6.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.androidx.viewpager2\\1.0.0.8\\xamarin.androidx.viewpager2.1.0.0.8.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.ffimageloading\\2.4.11.982\\xamarin.ffimageloading.2.4.11.982.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.ffimageloading.forms\\2.4.11.982\\xamarin.ffimageloading.forms.2.4.11.982.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.google.android.material\\1.2.1.1\\xamarin.google.android.material.1.2.1.1.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.google.guava.listenablefuture\\1.0.0.2\\xamarin.google.guava.listenablefuture.1.0.0.2.nupkg.sha512"

@@ -33,4 +33,3 @@ C:\Users\Flynn\source\repos\BCCardReader\CameraTest\obj\Debug\netstandard2.0\Cam
 C:\Users\Flynn\source\repos\BCCardReader\CameraTest\obj\Debug\netstandard2.0\ref\CameraTest.dll
 C:\Users\Flynn\source\repos\BCCardReader\CameraTest\obj\Debug\netstandard2.0\CameraTest.pdb
 C:\Users\Flynn\source\repos\BCCardReader\CameraTest\obj\Debug\netstandard2.0\CardCreatorPage.xaml.g.cs
-C:\Users\Flynn\source\repos\BCCardReader\CameraTest\obj\Debug\netstandard2.0\CardView.xaml.g.cs

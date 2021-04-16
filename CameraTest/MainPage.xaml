@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="CameraTest.MainPage"
 						 xmlns:l="clr-namespace:CameraTest"
 						 xmlns:m="clr-namespace:CameraTest.Model">
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<!--<Image Source="{Binding CameraImage}" Grid.Row="0">
-			<Image.Effects>
-				<tt:TouchEffect Capture="True"
-                            TouchAction="OnTouchEffectAction" />
-			</Image.Effects>
-		</Image>-->
-		<!--<Grid Grid.
-		
-		Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Button Text="Take Photo" Command="{Binding TakeImageCommand}" Grid.Column="0"/>
-			<Button Text="Pick Photo" Command="{Binding PickImageCommand}" Grid.Column="1"/>
-		</Grid>-->
 
-		<ListView ItemsSource="{Binding CardData}">
+		<ListView ItemsSource="{Binding Cards}" RowHeight="192">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-					<l:CardView/>
+				<ViewCell>
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<ffimageloading:CachedImage 
+								Source="{Binding Image}"
+								CacheDuration= "50"
+								RetryCount= "3"
+								RetryDelay= "600"
+								DownsampleToViewSize = "true"/>
+							<!--<Image Source="{Binding Image}"/>-->
+							<Label Grid.Row="1" Text="{Binding Name}"/>
+						</Grid>
+					</ViewCell>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>

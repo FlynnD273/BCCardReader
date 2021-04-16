@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l8M8h2NONXIy2tmWhDJJyD9FpC1m8YgvXRQN3KnK1wOVQFg503MKePnOcgVAY2CGQKBP1Yq6LZu/ZfCuMUD9cQ==",
+  "dgSpecHash": "ouK6BusDwR/yrvnLXiDbeYLchlEC6t0Ki2qa6RmCCS9FooY8wcrJzdAwCUR+G66N7JjBhav598d0rcvTKsPMxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Flynn\\source\\repos\\BCCardReader\\CameraTest\\CameraTest.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,8 @@
     "C:\\Users\\Flynn\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
     "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.ffimageloading\\2.4.11.982\\xamarin.ffimageloading.2.4.11.982.nupkg.sha512",
+    "C:\\Users\\Flynn\\.nuget\\packages\\xamarin.ffimageloading.forms\\2.4.11.982\\xamarin.ffimageloading.forms.2.4.11.982.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512"
   ],
   "logs": []

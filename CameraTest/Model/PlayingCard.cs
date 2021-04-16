@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CameraTest.Extension;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
 using Utils.Model;
@@ -8,22 +11,23 @@ using Xamarin.Forms;
 
 namespace CameraTest.Model
 {
-    //[XmlRoot(ElementName = "root", Namespace = "")]
+    [XmlRoot(ElementName = "root", Namespace = "")]
     //[Serializable]
+    [DataContract]
     public class PlayingCard : NotifyPropertyChangedBase
     {
         private ImageSource _image;
 
         public ImageSource Image
         {
-            get 
-            { 
+            get
+            {
                 if (_image == null)
                 {
                     _image = ImageSource.FromFile(_imagePath);
                 }
 
-                return _image; 
+                return _image;
             }
         }
 
@@ -34,7 +38,7 @@ namespace CameraTest.Model
         //    {
         //        if (_thumbnail == null)
         //        {
-        //            _thumbnail = ImageSource.FromFile(_imagePath);
+        //            _thumbnail = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "thumb"));
         //        }
 
         //        return _thumbnail;
@@ -44,7 +48,8 @@ namespace CameraTest.Model
 
         private CardType _type;
 
-        [XmlElement("Type")]
+        //[XmlElement("Type")]
+        [DataMember]
         public CardType Type
         {
             get { return _type; }
@@ -53,15 +58,17 @@ namespace CameraTest.Model
 
         private string _name;
 
-        [XmlElement("Name")]
+        //[XmlElement("Name")]
+        [DataMember]
         public string Name
         {
             get { return _name; }
             set { _UpdateField(ref _name, value); }
         }
 
-        [XmlElement("ImagePath")]
-        private string _imagePath { get; }
+        //[XmlElement("ImagePath")]
+        [DataMember]
+        private string _imagePath { get; set; }
 
         PlayingCard()
         {
@@ -76,7 +83,6 @@ namespace CameraTest.Model
         }
     }
 
-    [Serializable]
     public enum CardType
     {
         Normal,

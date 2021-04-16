@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Utils.Model
 {
+    [DataContract]
     public class NotifyPropertyChangedBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

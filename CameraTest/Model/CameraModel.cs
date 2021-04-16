@@ -4,28 +4,27 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using Utils.Command;
 using Utils.Model;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CameraTest.Model
 {
     class CameraModel : ViewModelBase
     {
-        private readonly string dbPath = "cardsdb.xml";
-        private DataSet _cardData;
-        public DataSet CardData
-        {
-            get { return _cardData; }
-            set { _UpdateField(ref _cardData, value); }
-        }
+        private readonly string workingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly string dbPath;
 
-        private XmlSerializer xmlSerializer = new XmlSerializer(typeof(PlayingCard[]));
+        private DataContractSerializer xmlSerializer = new DataContractSerializer(typeof(ObservableCollection<PlayingCard>));
 
         public ObservableCollection<PlayingCard> Cards { get; private set; } = new ObservableCollection<PlayingCard>();
 
@@ -54,57 +53,79 @@ namespace CameraTest.Model
             //PickImageCommand = new DelegateCommand(_PickImage);
             CreateCardCommand = new DelegateCommand(_CreateCard);
 
-            Cards = new ObservableCollection<PlayingCard>();
+            dbPath = Path.Combine(workingPath, "cardsdb.xml");
 
+            //Read database
             if (File.Exists(dbPath))
             {
-                foreach (PlayingCard c in (PlayingCard[])xmlSerializer.Deserialize(new StreamReader(dbPath)))
-                {
-                    Cards.Add(c);
-                }
+                string s = File.ReadAllText(dbPath);
+                Cards = (ObservableCollection<PlayingCard>)xmlSerializer.ReadObject(new XmlTextReader(dbPath));
+            }
+            else
+            {
+                Cards = new ObservableCollection<PlayingCard>();
             }
         }
 
         private async void _CreateCard()
         {
-            await DisplayAlert("Alert", "Taking image!", "OK");
-
-            MediaFile photo = null;
+            //await DisplayAlert("Alert", "Taking image!", "OK");
+            string path = Path.Combine(workingPath, "img", Guid.NewGuid().ToString() + ".jpg");
             try
             {
-                photo = await _TakeImage();
-                await DisplayAlert("Alert", "Image taken!", "OK");
+                await _SavePhotoToFile(await MediaPicker.CapturePhotoAsync(), path);
+                //await DisplayAlert("Alert", "Image taken!", "OK");
             }
             catch (Exception e)
             {
                 await DisplayAlert("Error", e.Message, "OK");
-            }
-
-            if (photo == null)
-            {
-                await DisplayAlert("Error", "Photo was null", "OK");
                 return;
             }
 
-            string path = "img/" + Guid.NewGuid().ToString();
-            File.Move(photo.Path, path);
-            var creatorPage = new CardCreatorPage(new PlayingCard(CardType.Normal, path, ""));
+            var creatorPage = new CardCreatorPage(new PlayingCard(CardType.Normal, path, ""), Navigation);
 
             await Navigation.PushModalAsync(creatorPage);
 
-            Cards.Add(creatorPage.Card);
-            xmlSerializer.Serialize(new StreamWriter(dbPath), Cards);
+
+            if (await creatorPage.WaitAsync)
+            {
+                Cards.Add(creatorPage.Card);
+
+                //File.Delete(dbPath);
+                using (var fs = new FileStream(dbPath, FileMode.Create))
+                {
+                    xmlSerializer.WriteObject(fs, Cards);
+                }
+            }
         }
 
-        private async Task<MediaFile> _TakeImage()
+        //private async Task<MediaFile> _TakeImage()
+        //{
+        //    return await MediaPicker.CapturePhotoAsync();
+        //    //return f;
+        //}
+
+        private async Task _SavePhotoToFile (FileResult photo, string path)
         {
-            MediaFile f = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
+            // canceled
+            if (photo == null)
             {
-                DefaultCamera = CameraDevice.Rear,
-                SaveToAlbum = true
-            });
-            await DisplayAlert("Alert", "Image taken!", "OK");
-            return f;
+                return;
+            }
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+            }
+            // save the file into local storage
+            var newFile = path;
+            using (var stream = await photo.OpenReadAsync())
+            using (var newStream = File.OpenWrite(newFile))
+                await stream.CopyToAsync(newStream);
+
+            //File.Copy(path, Path.ChangeExtension(path, "thumb"));
+
+            //var img = System.Drawing.Image.FromFile(path);
+            //img.GetThumbnailImage(120, 120, null, IntPtr.Zero).Save(Path.ChangeExtension(path, "thumb"));
         }
 
         //private async void _PickImage()
