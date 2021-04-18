@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:c="clr-namespace:Pokedex.Converter"
+             x:Class="Pokedex.App">
+	<!--
+	Grass,
+	Fire,
+	Water,
+	Lightning,
+	Psychic,
+	Fighting,
+	Darkness,
+	Metal,
+	Colorless,
+	Fairy,
+	Dragon,
+  -->
+	<Application.Resources>
+		<c:EnumColorConverter x:Key="EnumColorConverter"/>
+		<Color x:Key="Grass">#66dd7c</Color>
+		<Color x:Key="Fire">#ea4f54</Color>
+		<Color x:Key="Water">#388fc9</Color>
+		<Color x:Key="Lightning">#efdb67</Color>
+		<Color x:Key="Psychic">#a254c4</Color>
+		<Color x:Key="Fighting">#87400d</Color>
+		<Color x:Key="Darkness">#133f56</Color>
+		<Color x:Key="Metal">#9cb3b7</Color>
+		<Color x:Key="Colorless">#f8f5f6</Color>
+		<Color x:Key="Fairy">#d83a77</Color>
+		<Color x:Key="Dragon">#babf24</Color>
+	</Application.Resources>
+</Application>
