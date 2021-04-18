@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+						 xmlns:c="clr-namespace:Pokedex.Converter"
+             x:Class="Pokedex.Model.CardCreatorPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<c:IntEnumConverter x:Key="IntEnum"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	
+	<StackLayout Orientation="Vertical">
+		<Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
+		<Image Source="{Binding Card.Image}" Aspect="AspectFit" WidthRequest="192" BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColorConverter}}"/>
+		<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
+		<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
+		<Button Text="Confirm" Command="{Binding ConfirmCommand}"/>
+	</StackLayout>
+</ContentPage>
