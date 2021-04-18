@@ -29,7 +29,7 @@
 								RetryCount= "3"
 								RetryDelay= "100"
 								DownsampleToViewSize = "true"/>
-			<Label Grid.Row="1" Padding="5, 0, 5, 0" Text="{Binding Name}" HorizontalOptions="Center" BackgroundColor="White" FontSize="Medium"/>
+			<Label Grid.Row="1" Padding="5, 0, 5, 0" Text="{Binding Name}" HorizontalOptions="Center" BackgroundColor="{AppThemeBinding Light=White, Dark=Black}" FontSize="Medium"/>
 		</Grid>
 	</ViewCell.View>
 </ViewCell>
