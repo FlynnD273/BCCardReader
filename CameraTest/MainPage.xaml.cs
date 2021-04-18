@@ -17,5 +17,9 @@ namespace CameraTest
 
             BindingContext = new CameraModel(Navigation, this);
         }
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            ((CameraModel)BindingContext).EditCard((PokemonCard)e.Item);
+        }
     }
 }

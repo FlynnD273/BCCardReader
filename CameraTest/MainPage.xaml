@@ -1,36 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-						 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="CameraTest.MainPage"
 						 xmlns:l="clr-namespace:CameraTest"
+						 xmlns:c="clr-namespace:CameraTest.Converter"
 						 xmlns:m="clr-namespace:CameraTest.Model">
-
+	<ContentPage.Resources>
+	</ContentPage.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<ListView ItemsSource="{Binding Cards}" RowHeight="192">
+		<ListView ItemsSource="{Binding Cards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
 			<ListView.ItemTemplate>
 				<DataTemplate>
-				<ViewCell>
-						<Grid>
-							<Grid.RowDefinitions>
-								<RowDefinition/>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
-							<ffimageloading:CachedImage 
-								Source="{Binding Image}"
-								CacheDuration= "50"
-								RetryCount= "3"
-								RetryDelay= "600"
-								DownsampleToViewSize = "true"/>
-							<!--<Image Source="{Binding Image}"/>-->
-							<Label Grid.Row="1" Text="{Binding Name}"/>
-						</Grid>
-					</ViewCell>
+					<l:CardViewCell/>
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>

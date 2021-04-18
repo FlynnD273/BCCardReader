@@ -10,6 +10,7 @@
 	</ContentPage.Resources>
 	
 	<StackLayout Orientation="Vertical">
+		<Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
 		<Image Source="{Binding Card.Image}" Aspect="AspectFit" WidthRequest="192"/>
 		<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
 		<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>

@@ -18,5 +18,10 @@ namespace CameraTest.Model
         {
             await _page.DisplayAlert(title, message, cancel);
         }
+
+        internal async Task<bool> DisplayAlert(string title, string message, string cancel, string accept)
+        {
+            return await _page.DisplayAlert(title, message, accept, cancel);
+        }
     }
 }

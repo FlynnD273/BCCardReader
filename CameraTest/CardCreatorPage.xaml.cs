@@ -1,7 +1,9 @@
 ﻿using CameraTest.Extension;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Utils.Command;
@@ -11,14 +13,19 @@ using Xamarin.Forms.Xaml;
 namespace CameraTest.Model
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardCreatorPage : ContentPage
+    public partial class CardCreatorPage : ContentPage, INotifyPropertyChanged
     {
-        public PlayingCard Card { get; }
+        public PokemonCard Card { get; }
 
         private TaskCompletionSource<bool> _tcs;
         public Task<bool> WaitAsync => _tcs.Task;
 
-        public DelegateCommand ConfirmCommand { get; }
+        private bool _canDelete;
+        public bool CanDelete
+        {
+            get { return _canDelete; }
+            set { _UpdateField(ref _canDelete, value); }
+        }
 
         public List<string> CardTypes
         {
@@ -28,10 +35,18 @@ namespace CameraTest.Model
             }
         }
 
-        public CardCreatorPage(PlayingCard card, INavigation navigation)
+        public bool Delete { get; private set; }
+
+        public DelegateCommand ConfirmCommand { get; }
+        public DelegateCommand DeleteCommand { get; }
+
+
+        public CardCreatorPage(PokemonCard card, INavigation navigation)
         {
             InitializeComponent();
             ConfirmCommand = new DelegateCommand(_Confirm);
+            DeleteCommand = new DelegateCommand(_Delete);
+
             Card = card;
             BindingContext = this;
             _tcs = new TaskCompletionSource<bool>();
@@ -48,6 +63,30 @@ namespace CameraTest.Model
         {
             _tcs.SetResult(false);
             return base.OnBackButtonPressed();
+        }
+
+        private void _Delete()
+        {
+            Delete = true;
+            _Confirm();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void _UpdateField<T>(ref T field, T newValue,
+            Action<T> onChangedCallback = null,
+            [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, newValue))
+            {
+                return;
+            }
+
+            T oldValue = field;
+
+            field = newValue;
+            onChangedCallback?.Invoke(oldValue);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
