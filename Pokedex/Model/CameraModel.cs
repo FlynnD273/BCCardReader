@@ -1,11 +1,13 @@
-﻿using Pokedex.Converter;
+﻿extern alias ShimDrawing;
+
+using Pokedex.Converter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Drawing;
+using ShimDrawing::System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,6 +19,8 @@ using Utils.Command;
 using Utils.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Image = ShimDrawing::System.Drawing.Image;
+using AForge.Imaging.Filters;
 
 namespace Pokedex.Model
 {
@@ -56,20 +60,20 @@ namespace Pokedex.Model
                 Cards = new ObservableCollection<PokemonCard>();
             }
 
-            if (Cards.Count > 0)
-            {
-                PokemonCard c = Cards[0];
-                Cards.Clear();
+            //if (Cards.Count > 0)
+            //{
+            //    PokemonCard c = Cards[0];
+            //    Cards.Clear();
 
-                for (int i = 0; i < 11; i++)
-                {
-                    Cards.Add(new PokemonCard((CardType)i, c.ImagePath, i.ToString()));
-                }
+            //    for (int i = 0; i < 11; i++)
+            //    {
+            //        Cards.Add(new PokemonCard((CardType)i, c.ImagePath, i.ToString()));
+            //    }
 
-                Cards.Remove(c);
+            //    Cards.Remove(c);
 
-                _UpdateDatabase();
-            }
+            //    _UpdateDatabase();
+            //}
         }
 
         private async void _DbError()
@@ -82,6 +86,11 @@ namespace Pokedex.Model
         {
             //Take photo and save it locally
             string path = await _SaveNewPhoto(await MediaPicker.CapturePhotoAsync());
+
+            if (path == null)
+            {
+                return;
+            }
 
             //Edit the card
             var creatorPage = new CardCreatorPage(new PokemonCard(CardType.Colorless, path, ""), Navigation);
@@ -155,11 +164,24 @@ namespace Pokedex.Model
                     Directory.CreateDirectory(Path.GetDirectoryName(path));
                 }
 
+                ResizeBilinear filter = new ResizeBilinear(400, 300);
+
                 //Save the file to folder
-                var newFile = path;
-                using (var stream = await photo.OpenReadAsync())
-                using (var newStream = File.OpenWrite(newFile))
-                    await stream.CopyToAsync(newStream);
+                using (Stream stream = await photo.OpenReadAsync())
+                using (Bitmap b = (Bitmap)Image.FromStream(stream))
+                using (Stream img = File.OpenWrite(path))
+                {
+                    filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
+                    filter.Apply(ImageProcessor.Format(b)).Save(img, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
+
+                using (Stream stream = File.OpenRead(path))
+                using (Bitmap b = (Bitmap)Image.FromStream(stream))
+                using (Stream img = File.OpenWrite(Path.ChangeExtension(path, "card")))
+                {
+                    //filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
+                    filter.Apply(ImageProcessor.Format(b)).Save(img, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
 
                 return path;
             }

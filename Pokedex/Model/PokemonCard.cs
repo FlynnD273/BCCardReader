@@ -31,24 +31,25 @@ namespace Pokedex.Model
             }
         }
 
-        //private ImageSource _thumbnail;
-        //public ImageSource Thumbnail
-        //{
-        //    get
-        //    {
-        //        if (_thumbnail == null)
-        //        {
-        //            _thumbnail = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "thumb"));
-        //        }
+        private ImageSource _croppedImage;
+        public ImageSource CroppedImage
+        {
+            get
+            {
+                if (_croppedImage == null)
+                {
+                    _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
+                }
 
-        //        return _thumbnail;
-        //    }
-        //}
+                return _croppedImage;
+            }
+
+            set { _UpdateField(ref _croppedImage, value); }
+        }
 
 
         private CardType _type;
 
-        //[XmlElement("Type")]
         [DataMember]
         public CardType Type
         {
@@ -58,7 +59,6 @@ namespace Pokedex.Model
 
         private string _name;
 
-        //[XmlElement("Name")]
         [DataMember]
         public string Name
         {
