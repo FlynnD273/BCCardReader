@@ -1,9 +1,0 @@
-C:\Users\Flynn\source\repos\BCCardReader\Utils\bin\Debug\netstandard2.0\Utils.deps.json
-C:\Users\Flynn\source\repos\BCCardReader\Utils\bin\Debug\netstandard2.0\Utils.dll
-C:\Users\Flynn\source\repos\BCCardReader\Utils\bin\Debug\netstandard2.0\Utils.pdb
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.AssemblyInfoInputs.cache
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.AssemblyInfo.cs
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.csproj.CoreCompileInputs.cache
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.dll
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.pdb
-C:\Users\Flynn\source\repos\BCCardReader\Utils\obj\Debug\netstandard2.0\Utils.csprojAssemblyReference.cache
