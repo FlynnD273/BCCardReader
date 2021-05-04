@@ -24,7 +24,7 @@
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<ffimageloading:CachedImage 
-								Source="{Binding Image}"
+								Source="{Binding CroppedImage}"
 								CacheDuration= "50"
 								RetryCount= "3"
 								RetryDelay= "100"
