@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Xml.Serialization;
@@ -36,9 +37,18 @@ namespace Pokedex.Model
         {
             get
             {
-                if (_croppedImage == null)
+                if (_croppedImage == null || _croppedImage == Image)
                 {
-                    _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
+                    if (File.Exists(Path.ChangeExtension(_imagePath, "card")))
+                    {
+                        _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
+                    }
+                    else
+                    {
+                        //var s = Application.Current.Resources;
+                        
+                        _croppedImage = ImageSource.FromStream(() => Util.Files.GetResourceStream("Pokedex.Images.pokeball.png"));
+                    }
                 }
 
                 return _croppedImage;
@@ -46,7 +56,6 @@ namespace Pokedex.Model
 
             set { _UpdateField(ref _croppedImage, value); }
         }
-
 
         private CardType _type;
 

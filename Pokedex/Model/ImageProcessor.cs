@@ -23,25 +23,27 @@ namespace Pokedex.Model
             return Image.Clone(bitmap, PixelFormat.Format24bppRgb);
         }
 
+        public static Bitmap Format8bpp(Bitmap bitmap)
+        {
+            return Image.Clone(bitmap, PixelFormat.Format8bppIndexed);
+        }
+
         private static Bitmap _Preprocess(Bitmap bitmap)
         {
-            Bitmap grayImage = Grayscale.CommonAlgorithms.BT709.Apply(Format(bitmap));
+            Bitmap grayImage = Grayscale.CommonAlgorithms.RMY.Apply(Format(bitmap));
 
-            DifferenceEdgeDetector edgeDetector = new DifferenceEdgeDetector();
-            Bitmap edges = edgeDetector.Apply(grayImage);
-
-            FiltersSequence filters = new FiltersSequence();
-
-            Threshold thresholdFilter = new Threshold(30);
-            Blur blurFilter = new Blur()
+            GaussianBlur blurFilter = new GaussianBlur()
             {
                 ProcessAlpha = false,
+                Size = 15,
             };
 
-            filters.Add(thresholdFilter);
+            FiltersSequence filters = new FiltersSequence();
+            filters.Add(new Threshold(50));
             filters.Add(blurFilter);
-
-            return filters.Apply(edges);
+            filters.Add(new CannyEdgeDetector());
+            filters.Add(new Dilatation());
+            return filters.Apply(grayImage);
         }
 
         public static Bitmap FindPlayingCard(Bitmap bitmap)
@@ -110,12 +112,31 @@ namespace Pokedex.Model
             }
             var c = shapes[0].Corners;
 
-            c.Add(c[0]);
-            c.RemoveAt(0);
+            Size s = _GetBoundingBox(c);
+
+            if (c[0].X > c[2].X || c[0].Y > c[2].Y)
+            {
+                if (c[0].Y > c[2].Y)
+                {
+                    c.Add(c[0]);
+                    c.RemoveAt(0);
+                }
+                else
+                {
+                    c.Insert(0, c[3]);
+                    c.RemoveAt(3);
+                }
+            }
             return c;
         }
 
         private static double _GetAreaOfBounds(List<IntPoint> points)
+        {
+            Size s = _GetBoundingBox(points);
+            return s.Width * s.Height;
+        }
+
+        private static Size _GetBoundingBox (List<IntPoint> points)
         {
             int xMin = points[0].X,
                 xMax = points[0].X,
@@ -130,7 +151,7 @@ namespace Pokedex.Model
                 yMax = yMax > p.Y ? yMax : p.Y;
             }
 
-            return (xMax - xMin) * (yMax - yMin);
+            return new Size(xMax - xMin, yMax - yMin);
         }
     }
 }

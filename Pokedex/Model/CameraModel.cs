@@ -93,7 +93,7 @@ namespace Pokedex.Model
             }
 
             //Edit the card
-            var creatorPage = new CardCreatorPage(new PokemonCard(CardType.Colorless, path, ""), Navigation);
+            var creatorPage = new CardCreatorPage(new PokemonCard(CardType.Colorless, path, ""), Navigation, canDelete: false);
 
             await Navigation.PushModalAsync(creatorPage);
 
@@ -111,7 +111,7 @@ namespace Pokedex.Model
         {
             PokemonCard old = card.Clone();
             //Edit the card
-            var creatorPage = new CardCreatorPage(card, Navigation) { CanDelete = true };
+            var creatorPage = new CardCreatorPage(card, Navigation, canDelete: true);
 
             await Navigation.PushModalAsync(creatorPage);
 
@@ -164,22 +164,12 @@ namespace Pokedex.Model
                     Directory.CreateDirectory(Path.GetDirectoryName(path));
                 }
 
-                ResizeBilinear filter = new ResizeBilinear(400, 300);
-
                 //Save the file to folder
                 using (Stream stream = await photo.OpenReadAsync())
                 using (Bitmap b = (Bitmap)Image.FromStream(stream))
                 using (Stream img = File.OpenWrite(path))
                 {
-                    filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
-                    filter.Apply(ImageProcessor.Format(b)).Save(img, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
-                }
-
-                using (Stream stream = File.OpenRead(path))
-                using (Bitmap b = (Bitmap)Image.FromStream(stream))
-                using (Stream img = File.OpenWrite(Path.ChangeExtension(path, "card")))
-                {
-                    //filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
+                    ResizeBilinear filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
                     filter.Apply(ImageProcessor.Format(b)).Save(img, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
                 }
 

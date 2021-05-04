@@ -68,18 +68,22 @@ namespace Pokedex.Model
         public DelegateCommand DeleteCommand { get; }
 
 
-        public CardCreatorPage(PokemonCard card, INavigation navigation)
+        public CardCreatorPage(PokemonCard card, INavigation navigation, bool canDelete)
         {
             InitializeComponent();
             ConfirmCommand = new DelegateCommand(_Confirm);
             DeleteCommand = new DelegateCommand(_Delete);
-            GreenscreenImageCommand = new DelegateCommand(_GreenscreenImage);
-            CropImageCommand = new DelegateCommand(_CropImage);
+            CropImageCommand = new DelegateCommand(() => Task.Run(_CropImage));
 
             Card = card;
             BindingContext = this;
             _tcs = new TaskCompletionSource<bool>();
-            DisplayImage = ImageSource.FromFile(Path.ChangeExtension(Card.ImagePath, "card"));
+
+            CanDelete = canDelete;
+            if (!CanDelete)
+            {
+                CropImageCommand.Execute(null);
+            }
         }
 
         private async void _Confirm()

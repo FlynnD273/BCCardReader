@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 						 xmlns:c="clr-namespace:Pokedex.Converter"
-						 xmlns:color="clr-namespace:ColorPicker;assembly=ColorPicker"
 						 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 						 x:Class="Pokedex.Model.CardCreatorPage">
 	<ContentPage.Resources>
 		<ResourceDictionary>
 			<c:IntEnumConverter x:Key="IntEnum"/>
+			<c:EnumColorConverter x:Key="EnumColor"/>
 		</ResourceDictionary>
 	</ContentPage.Resources>
 
@@ -17,7 +17,7 @@
 			<Button Grid.Column="1" Text="Crop" Command="{Binding CropImageCommand}"/>
 			
 			<Image Source="{Binding Card.CroppedImage, Mode=OneWay}" 
-						BackgroundColor="{Binding SelectedColor, Mode=OneWay}"
+						BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"
 						HeightRequest="192"/>
 			<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
 			<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>

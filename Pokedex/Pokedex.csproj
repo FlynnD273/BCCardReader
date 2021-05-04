@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Image\pikachu.png" />
+    <EmbeddedResource Include="Images\pokeball.png" />
   </ItemGroup>
 
   <ItemGroup>
