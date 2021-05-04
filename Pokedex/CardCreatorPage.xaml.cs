@@ -4,17 +4,16 @@ using Pokedex.Extension;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using ShimDrawing::System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Utils.Command;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Image = ShimDrawing::System.Drawing.Image;
+using Pokedex.Cards;
+using Pokedex.Util;
+using Xamarin.Essentials;
 
 namespace Pokedex.Model
 {
@@ -34,38 +33,20 @@ namespace Pokedex.Model
             set { _UpdateField(ref _canDelete, value); }
         }
 
-        private void _CropImage()
-        {
-            using (Bitmap img = (Bitmap)Image.FromStream(File.OpenRead(Card.ImagePath)))
-            using (Bitmap cropped = ImageProcessor.FindPlayingCard(img))
-            {
-                if (cropped != null)
-                {
-                    using (Stream writer = File.OpenWrite(Path.ChangeExtension(Card.ImagePath, "card")))
-                    {
-                        cropped.Save(writer, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
-                    }
-                    Card.CroppedImage = null;
-                }
-            }
-        }
-
         public List<string> CardTypes
         {
             get
             {
-                return Enum.GetNames(typeof(CardType)).Select(b => b.SplitCamelCase()).ToList();
+                return Enum.GetNames(typeof(PokemonCardType)).Select(b => b.SplitCamelCase()).ToList();
             }
         }
 
         public bool Delete { get; private set; }
 
         public DelegateCommand ConfirmCommand { get; }
-        public DelegateCommand GreenscreenImageCommand { get; }
-        public DelegateCommand CropImageCommand { get; }
-
-
         public DelegateCommand DeleteCommand { get; }
+        public DelegateCommand TakePhotoCommand { get; }
+
 
 
         public CardCreatorPage(PokemonCard card, INavigation navigation, bool canDelete)
@@ -73,17 +54,13 @@ namespace Pokedex.Model
             InitializeComponent();
             ConfirmCommand = new DelegateCommand(_Confirm);
             DeleteCommand = new DelegateCommand(_Delete);
-            CropImageCommand = new DelegateCommand(() => Task.Run(_CropImage));
+            TakePhotoCommand = new DelegateCommand(_TakePhoto);
 
             Card = card;
             BindingContext = this;
             _tcs = new TaskCompletionSource<bool>();
 
             CanDelete = canDelete;
-            if (!CanDelete)
-            {
-                CropImageCommand.Execute(null);
-            }
         }
 
         private async void _Confirm()
@@ -103,6 +80,16 @@ namespace Pokedex.Model
         {
             Delete = true;
             _Confirm();
+        }
+
+        private async void _TakePhoto()
+        {
+            string newPath = await Files.SaveNewPhoto(await MediaPicker.CapturePhotoAsync());
+
+            if (newPath == "") return;
+
+            Card.ImagePath = newPath;
+            Card.CroppedImage = null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

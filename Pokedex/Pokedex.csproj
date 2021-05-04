@@ -12,12 +12,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Image\Pikachu.png" />
+    <Compile Remove="Image\**" />
+    <EmbeddedResource Remove="Image\**" />
+    <None Remove="Image\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Image\pikachu.png" />
+    <None Remove="Images\pikachu.png" />
+    <None Remove="Images\PokeShake.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\pikachu.png" />
     <EmbeddedResource Include="Images\pokeball.png" />
+    <EmbeddedResource Include="Images\pokeshake.gif" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Pokedex.Model;
+﻿using Pokedex.Cards;
+using Pokedex.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -14,11 +14,11 @@
 	<ScrollView Orientation="Vertical">
 		<StackLayout Orientation="Vertical">
 			<Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
-			<Button Grid.Column="1" Text="Crop" Command="{Binding CropImageCommand}"/>
-			
-			<Image Source="{Binding Card.CroppedImage, Mode=OneWay}" 
+			<Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
+
+			<ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" 
 						BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"
-						HeightRequest="192"/>
+						HeightRequest="192" CacheType="None"/>
 			<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
 			<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
 			<Button Text="Confirm" Command="{Binding ConfirmCommand}"/>

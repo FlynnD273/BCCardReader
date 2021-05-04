@@ -1,26 +1,14 @@
 ﻿extern alias ShimDrawing;
-
-using Pokedex.Converter;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
-using ShimDrawing::System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 using Utils.Command;
-using Utils.Model;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Image = ShimDrawing::System.Drawing.Image;
-using AForge.Imaging.Filters;
+using Pokedex.Cards;
+using Pokedex.Util;
 
 namespace Pokedex.Model
 {
@@ -85,7 +73,15 @@ namespace Pokedex.Model
         private async void _CreateCard()
         {
             //Take photo and save it locally
-            string path = await _SaveNewPhoto(await MediaPicker.CapturePhotoAsync());
+            string path = null;
+            try
+            {
+                path = await Files.SaveNewPhoto(await MediaPicker.CapturePhotoAsync());
+            }
+            catch (IOException e)
+            {
+                DisplayAlert("ERROR", e.Message, "OK");
+            }
 
             if (path == null)
             {
@@ -93,7 +89,7 @@ namespace Pokedex.Model
             }
 
             //Edit the card
-            var creatorPage = new CardCreatorPage(new PokemonCard(CardType.Colorless, path, ""), Navigation, canDelete: false);
+            var creatorPage = new CardCreatorPage(new PokemonCard(PokemonCardType.Colorless, path, ""), Navigation, canDelete: false);
 
             await Navigation.PushModalAsync(creatorPage);
 
@@ -109,7 +105,7 @@ namespace Pokedex.Model
 
         public async void EditCard(PokemonCard card)
         {
-            PokemonCard old = card.Clone();
+            PokemonCard old = (PokemonCard)card.Clone();
             //Edit the card
             var creatorPage = new CardCreatorPage(card, Navigation, canDelete: true);
 
@@ -144,66 +140,5 @@ namespace Pokedex.Model
                 xmlSerializer.WriteObject(fs, Cards);
             }
         }
-
-        private async Task<string> _SaveNewPhoto(FileResult photo)
-        {
-            try
-            {
-                //Save in {App Directory}\img\{GUID}.jpg
-                string path = Path.Combine(workingPath, "img", Guid.NewGuid().ToString() + ".jpg");
-
-                //Canceled
-                if (photo == null)
-                {
-                    return null;
-                }
-
-                //Create img folder if needed
-                if (!Directory.Exists(Path.GetDirectoryName(path)))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(path));
-                }
-
-                //Save the file to folder
-                using (Stream stream = await photo.OpenReadAsync())
-                using (Bitmap b = (Bitmap)Image.FromStream(stream))
-                using (Stream img = File.OpenWrite(path))
-                {
-                    ResizeBilinear filter = new ResizeBilinear(800, (int)(800.0 * b.Height / b.Width));
-                    filter.Apply(ImageProcessor.Format(b)).Save(img, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
-                }
-
-                return path;
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Error", e.Message, "OK");
-                return null;
-            }
-        }
-
-        //private async void _PickImage()
-        //{
-        //    if (!CrossMedia.Current.IsPickPhotoSupported)
-        //    {
-        //        //await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
-        //        return;
-        //    }
-        //    var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
-        //    {
-        //        PhotoSize = PhotoSize.Medium
-        //    });
-
-
-        //    if (file == null)
-        //        return;
-
-        //    CameraImage = ImageSource.FromStream(() =>
-        //    {
-        //        var stream = file.GetStream();
-        //        file.Dispose();
-        //        return stream;
-        //    });
-        //}
     }
 }

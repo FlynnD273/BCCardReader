@@ -39,7 +39,7 @@ namespace Pokedex.Model
             };
 
             FiltersSequence filters = new FiltersSequence();
-            filters.Add(new Threshold(50));
+            filters.Add(new Threshold(150));
             filters.Add(blurFilter);
             filters.Add(new CannyEdgeDetector());
             filters.Add(new Dilatation());
@@ -49,6 +49,7 @@ namespace Pokedex.Model
         public static Bitmap FindPlayingCard(Bitmap bitmap)
         {
             var b = Format(bitmap);
+            //return _Preprocess(b);
             return _CropToQuad(b, _GetLargestBlob(_FindQuads(_Preprocess(b))));
         }
 
