@@ -18,7 +18,7 @@ using Xamarin.Essentials;
 namespace Pokedex.Model
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardCreatorPage : ContentPage
+    public partial class PokemonCardCreatorPage : ContentPage
     {
         public PokemonCard Card { get; }
 
@@ -27,7 +27,7 @@ namespace Pokedex.Model
 
 
         public static readonly BindableProperty CanDeleteProperty =
-  BindableProperty.Create("CanDelete", typeof(bool), typeof(CardCreatorPage), null);
+  BindableProperty.Create("CanDelete", typeof(bool), typeof(PokemonCardCreatorPage), null);
         public bool CanDelete
         {
             get { return (bool)GetValue(CanDeleteProperty); }
@@ -47,19 +47,26 @@ namespace Pokedex.Model
         public DelegateCommand ConfirmCommand { get; }
         public DelegateCommand DeleteCommand { get; }
         public DelegateCommand TakePhotoCommand { get; }
+        public DelegateCommand ToggleCropCommand { get; }
 
-        public CardCreatorPage(PokemonCard card, INavigation navigation, bool canDelete)
+        public PokemonCardCreatorPage(PokemonCard card, INavigation navigation, bool canDelete)
         {
             InitializeComponent();
             ConfirmCommand = new DelegateCommand(_Confirm);
             DeleteCommand = new DelegateCommand(_Delete);
             TakePhotoCommand = new DelegateCommand(_TakePhoto);
+            ToggleCropCommand = new DelegateCommand(_ToggleOriginalPhoto);
 
             Card = card;
             BindingContext = this;
             _tcs = new TaskCompletionSource<bool>();
 
             CanDelete = canDelete;
+        }
+
+        private void _ToggleOriginalPhoto()
+        {
+            Card.IsCropped = !Card.IsCropped;
         }
 
         private async void _Confirm()

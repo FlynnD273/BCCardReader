@@ -16,7 +16,7 @@
 
 		<l:Banner/>
 
-		<ListView Grid.Row="1" ItemsSource="{Binding Cards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
+		<ListView Grid.Row="1" ItemsSource="{Binding SortedCards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<l:CardViewCell/>

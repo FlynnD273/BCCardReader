@@ -9,17 +9,44 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Pokedex.Cards;
 using Pokedex.Util;
+using System.Linq;
 
 namespace Pokedex.Model
 {
     class CameraModel : ViewModelBase
     {
-        private readonly string workingPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private readonly string workingPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private readonly string dbPath;
 
         private DataContractSerializer xmlSerializer = new DataContractSerializer(typeof(ObservableCollection<PokemonCard>));
 
-        public ObservableCollection<PokemonCard> Cards { get; private set; } = new ObservableCollection<PokemonCard>();
+        private ObservableCollection<PokemonCard> _cards { get; } = new ObservableCollection<PokemonCard>();
+
+        private Func<PokemonCard, string> _sort;
+        public Func<PokemonCard, string> Sort
+        {
+            get { return _sort; }
+            set { _UpdateField(ref _sort, value, o => _UpdateCards()); }
+        }
+
+        private void _UpdateCards()
+        {
+            if (_cards.Count > 0)
+            {
+                SortedCards = _cards.OrderBy(Sort).ToArray();
+            }
+            else
+            {
+                SortedCards = new PokemonCard[0];
+            }
+        }
+
+        private PokemonCard[] _sortedCards;
+        public PokemonCard[] SortedCards
+        {
+            get => _sortedCards;
+            set { _UpdateField(ref _sortedCards, value); }
+        }
 
         public DelegateCommand TakeImageCommand { get; }
         public DelegateCommand PickImageCommand { get; }
@@ -29,6 +56,9 @@ namespace Pokedex.Model
         {
             CreateCardCommand = new DelegateCommand(_CreateCard);
 
+            //_cards.CollectionChanged += (o, a) => _UpdateCards();
+            Sort = o => o.Name;
+
             dbPath = Path.Combine(workingPath, "cardsdb.xml");
 
             //Read database
@@ -36,7 +66,8 @@ namespace Pokedex.Model
             {
                 try
                 {
-                    Cards = (ObservableCollection<PokemonCard>)xmlSerializer.ReadObject(new XmlTextReader(dbPath));
+                    _cards = (ObservableCollection<PokemonCard>)xmlSerializer.ReadObject(new XmlTextReader(dbPath));
+                    _UpdateCards();
                 }
                 catch (SerializationException e)
                 {
@@ -45,17 +76,18 @@ namespace Pokedex.Model
             }
             else
             {
-                Cards = new ObservableCollection<PokemonCard>();
+                _cards.Clear();
+                _UpdateDatabase();
             }
 
             //if (Cards.Count > 0)
             //{
-            //    PokemonCard c = Cards[0];
+            //    PlayingCardBase c = Cards[0];
             //    Cards.Clear();
 
             //    for (int i = 0; i < 11; i++)
             //    {
-            //        Cards.Add(new PokemonCard((CardType)i, c.ImagePath, i.ToString()));
+            //        Cards.Add(new PlayingCardBase((CardType)i, c.ImagePath, i.ToString()));
             //    }
 
             //    Cards.Remove(c);
@@ -67,7 +99,8 @@ namespace Pokedex.Model
         private async void _DbError()
         {
             await DisplayAlert("Error", "There was an error reading the database. If you add a card, all previous card data will be lost.", "OK");
-            Cards = new ObservableCollection<PokemonCard>();
+            _cards.Clear();
+            _UpdateCards();
         }
 
         private async void _CreateCard()
@@ -89,7 +122,7 @@ namespace Pokedex.Model
             }
 
             //Edit the card
-            var creatorPage = new CardCreatorPage(new PokemonCard(PokemonCardType.Colorless, path, ""), Navigation, canDelete: false);
+            var creatorPage = new PokemonCardCreatorPage(new PokemonCard(PokemonCardType.Colorless, path, ""), Navigation, canDelete: false);
 
             await Navigation.PushModalAsync(creatorPage);
 
@@ -97,7 +130,7 @@ namespace Pokedex.Model
             if (await creatorPage.WaitAsync)
             {
                 //Add the edited card
-                Cards.Add(creatorPage.Card);
+                _cards.Add(creatorPage.Card);
 
                 _UpdateDatabase();
             }
@@ -107,7 +140,7 @@ namespace Pokedex.Model
         {
             PokemonCard old = (PokemonCard)card.Clone();
             //Edit the card
-            var creatorPage = new CardCreatorPage(card, Navigation, canDelete: true);
+            var creatorPage = new PokemonCardCreatorPage(card, Navigation, canDelete: true);
 
             await Navigation.PushModalAsync(creatorPage);
 
@@ -116,14 +149,14 @@ namespace Pokedex.Model
             {
                 if (creatorPage.Delete)
                 {
-                    Cards.Remove(card);
+                    _cards.Remove(card);
                 }
 
                 _UpdateDatabase();
             }
             else
             {
-                Cards[Cards.IndexOf(card)] = old;
+                _cards[_cards.IndexOf(card)] = old;
             }
         }
 
@@ -137,8 +170,9 @@ namespace Pokedex.Model
 
             using (var fs = new FileStream(dbPath, FileMode.Create))
             {
-                xmlSerializer.WriteObject(fs, Cards);
+                xmlSerializer.WriteObject(fs, _cards);
             }
+            _UpdateCards();
         }
     }
 }

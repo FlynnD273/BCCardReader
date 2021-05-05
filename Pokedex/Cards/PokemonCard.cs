@@ -34,7 +34,7 @@ namespace Pokedex.Cards
 
         public PokemonCard(PokemonCardType type, string imagePath, string name) : base(imagePath, name)
         {
-            _loadingImage = "Pokedex.Images.pokeball.gif";
+            _loadingImage = "Pokedex.Images.pokeshake.gif";
             Type = type;
         }
 

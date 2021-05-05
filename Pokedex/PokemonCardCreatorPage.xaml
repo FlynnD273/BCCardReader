@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 						 xmlns:c="clr-namespace:Pokedex.Converter"
 						 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-						 x:Class="Pokedex.Model.CardCreatorPage">
+						 x:Class="Pokedex.Model.PokemonCardCreatorPage">
 	<ContentPage.Resources>
 		<ResourceDictionary>
 			<c:IntEnumConverter x:Key="IntEnum"/>
@@ -14,11 +14,18 @@
 	<ScrollView Orientation="Vertical">
 		<StackLayout Orientation="Vertical">
 			<Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
-			<Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
+				<Button Grid.Column="1" Text="Toggle Original" Command="{Binding ToggleCropCommand}"/>
+			</Grid>
 
 			<ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" 
 						BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"
-						HeightRequest="192" CacheType="None"/>
+						HeightRequest="192" CacheType="None" CacheDuration="0"/>
 			<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
 			<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
 			<Button Text="Confirm" Command="{Binding ConfirmCommand}"/>

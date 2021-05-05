@@ -60,13 +60,17 @@ namespace Pokedex.Cards
             {
                 if (_croppedImage == null || _isPlaceholder)
                 {
-                    if (File.Exists(Path.ChangeExtension(_imagePath, "card")))
+                    if (IsCropped && File.Exists(Path.ChangeExtension(_imagePath, "card")))
                     {
                         _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
                     }
-                    else if (cropTask == null || cropTask.IsCompleted)
+                    else if (cropTask == null || cropTask.IsCompleted && !IsCropped)
                     {
                         cropTask = Task.Run(_CropImage);
+                    }
+                    else if (!IsCropped)
+                    {
+                        _croppedImage = Image;
                     }
                 }
 
@@ -74,6 +78,14 @@ namespace Pokedex.Cards
             }
 
             set { _UpdateField(ref _croppedImage, value); }
+        }
+
+        private bool _isCropped;
+        [DataMember]
+        public bool IsCropped
+        {
+            get { return _isCropped; }
+            set { _UpdateField(ref _isCropped, value, o => _croppedImage = null); }
         }
 
         private string _name;
@@ -125,41 +137,45 @@ namespace Pokedex.Cards
                         cropped.Save(writer, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
                     CroppedImage = null;
-
-                    if (!TesseractApi.Initialized)
-                    {
-                        await TesseractApi.Init("eng");
-                    }
-
-                    TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.35), (int)(cropped.Height * 0.064)));
-                    TesseractApi.SetWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-                    if (await TesseractApi.SetImage(File.OpenRead(Path.ChangeExtension(ImagePath, "card"))))
-                    {
-                        string s = TesseractApi.Text;
-
-                        if (Name == "")
-                        {
-                            if (s != "")
-                            {
-                                if (s != "" && s[0].ToString() == s[0].ToString().ToLower())
-                                {
-                                    s = s.Substring(1, s.Length - 1);
-                                }
-                                TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-                                s = textInfo.ToTitleCase(s.ToLower());
-                            }
-                            else
-                            {
-                                s = "NO TEXT DETECTED";
-                            }
-
-                            Name = s;
-                        }
-                    }
+                    await _GetText(cropped);
                 }
             }
 
             _isPlaceholder = false;
+        }
+
+        private async Task _GetText(Bitmap cropped)
+        {
+            if (!TesseractApi.Initialized)
+            {
+                await TesseractApi.Init("eng");
+            }
+
+            TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.35), (int)(cropped.Height * 0.064)));
+            TesseractApi.SetWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+            if (await TesseractApi.SetImage(File.OpenRead(Path.ChangeExtension(ImagePath, "card"))))
+            {
+                string s = TesseractApi.Text;
+
+                if (Name == "" || Name == "NO TEXT DETECTED")
+                {
+                    if (s != "")
+                    {
+                        if (s != "" && s[0].ToString() == s[0].ToString().ToLower())
+                        {
+                            s = s.Substring(1, s.Length - 1);
+                        }
+                        TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                        s = textInfo.ToTitleCase(s.ToLower());
+                    }
+                    else
+                    {
+                        s = "NO TEXT DETECTED";
+                    }
+
+                    Name = s;
+                }
+            }
         }
     }
 }
