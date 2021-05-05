@@ -6,6 +6,13 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Tesseract;
+using XLabs.Ioc;
+using XLabs.Ioc;
+using XLabs.Ioc.TinyIOC;
+using XLabs.Platform.Device;
+using TinyIoC;
+using Tesseract.Droid;
 
 namespace Pokedex.Droid
 {
@@ -19,8 +26,15 @@ namespace Pokedex.Droid
 
             base.OnCreate(savedInstanceState);
 
+            var container = TinyIoCContainer.Current;
+            container.Register<ITesseractApi>((cont, parameters) =>
+            {
+                return new TesseractApi(ApplicationContext, AssetsDeployment.OncePerInitialization);
+            });
+            Resolver.SetResolver(new TinyResolver(container));
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             LoadApplication(new App());
         }

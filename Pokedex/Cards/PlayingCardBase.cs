@@ -8,6 +8,10 @@ using Utils.Model;
 using Pokedex.Model;
 using System.Threading.Tasks;
 using Utils.Command;
+using Tesseract;
+using XLabs.Ioc;
+using AForge.Imaging;
+using System;
 
 namespace Pokedex.Cards
 {
@@ -16,6 +20,20 @@ namespace Pokedex.Cards
     public class PlayingCardBase : NotifyPropertyChangedBase
     {
         protected string _loadingImage = "";
+
+        private static ITesseractApi _tesseractApi;
+        protected static ITesseractApi TesseractApi
+        {
+            get
+            {
+                if (_tesseractApi == null)
+                {
+                    _tesseractApi = Resolver.Resolve<ITesseractApi>();
+                }
+
+                return _tesseractApi;
+            }
+        }
 
         private ImageSource _image;
 
@@ -91,7 +109,7 @@ namespace Pokedex.Cards
             return new PlayingCardBase(ImagePath, Name);
         }
 
-        private void _CropImage()
+        private async void _CropImage()
         {
             _isPlaceholder = true;
             CroppedImage = ImageSource.FromStream(() => Util.Files.GetResourceStream(_loadingImage));
@@ -106,6 +124,36 @@ namespace Pokedex.Cards
                         cropped.Save(writer, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
                     CroppedImage = null;
+
+                    //int y = 0;
+                    //UnmanagedImage im = UnmanagedImage.FromManagedImage(cropped);
+                    //ShimDrawing::System.Drawing.Color startCol = im.GetPixel(im.Width / 2, 5);
+                    //int threshold = 20;
+
+                    //for (y = 0; y < im.Height / 2; y++)
+                    //{
+                    //    ShimDrawing::System.Drawing.Color col = im.GetPixel(im.Width / 2, y);
+                    //    if (Math.Abs(col.R - startCol.R) > threshold || Math.Abs(col.G - startCol.G) > threshold || Math.Abs(col.B - startCol.B) > threshold)
+                    //    {
+                    //        break;
+                    //    }
+                    //}
+
+                    if (!TesseractApi.Initialized)
+                    {
+                        await TesseractApi.Init("eng");
+                    }
+
+                    TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.4), (int)(cropped.Height * 0.064)));
+                    TesseractApi.SetWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+                    if (await TesseractApi.SetImage(File.OpenRead(Path.ChangeExtension(ImagePath, "card"))))
+                    {
+                        string s = TesseractApi.Text;
+                        if (Name == "")
+                        {
+                            Name = s;
+                        }
+                    }
                 }
             }
 

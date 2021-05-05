@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ColorPicker.iOS;
 using Foundation;
+using Tesseract;
+using Tesseract.iOS;
+using TinyIoC;
 using UIKit;
+using XLabs.Ioc;
+using XLabs.Ioc.TinyIOC;
 
 namespace Pokedex.iOS
 {
@@ -24,7 +28,12 @@ namespace Pokedex.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(); LoadApplication(new App());
-            ColorPickerEffects.Init();
+            var container = TinyIoCContainer.Current;
+            container.Register<ITesseractApi>((cont, parameters) =>
+            {
+                return new TesseractApi();
+            });
+            Resolver.SetResolver(new TinyResolver(container));
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

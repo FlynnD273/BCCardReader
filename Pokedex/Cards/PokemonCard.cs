@@ -14,7 +14,6 @@ using Xamarin.Forms;
 namespace Pokedex.Cards
 {
     [XmlRoot(ElementName = "root", Namespace = "")]
-    //[Serializable]
     [DataContract]
     public class PokemonCard : PlayingCardBase
     {
