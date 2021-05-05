@@ -39,11 +39,33 @@ namespace Pokedex.Model
             };
 
             FiltersSequence filters = new FiltersSequence();
-            filters.Add(new Threshold(150));
+            filters.Add(new Threshold((int)_GetAverageValue(new Crop(new Rectangle(0, 0, bitmap.Width, bitmap.Height / 10)).Apply(grayImage)) + 20));
             filters.Add(blurFilter);
             filters.Add(new CannyEdgeDetector());
             filters.Add(new Dilatation());
             return filters.Apply(grayImage);
+        }
+
+        private static double _GetAverageValue(Bitmap bitmap)
+        {
+            using (UnmanagedImage bmp = UnmanagedImage.FromManagedImage(bitmap))
+            {
+                Color tempColor;
+                double v = 0;
+                for (int i = 0; i < bmp.Height; i++)
+                {
+                    for (int j = 0; j < bmp.Width; j++)
+                    {
+                        tempColor = bmp.GetPixel(j, i);
+                        v += tempColor.R;
+                        v += tempColor.G;
+                        v += tempColor.B;
+                    }
+                }
+
+                v /= bmp.Height * bmp.Width * 3;
+                return v;
+            }
         }
 
         public static Bitmap FindPlayingCard(Bitmap bitmap)

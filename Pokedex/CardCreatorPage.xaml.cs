@@ -18,19 +18,20 @@ using Xamarin.Essentials;
 namespace Pokedex.Model
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CardCreatorPage : ContentPage, INotifyPropertyChanged
+    public partial class CardCreatorPage : ContentPage
     {
-        //private Stopwatch refresh = new Stopwatch();
         public PokemonCard Card { get; }
 
         private TaskCompletionSource<bool> _tcs;
         public Task<bool> WaitAsync => _tcs.Task;
 
-        private bool _canDelete;
+
+        public static readonly BindableProperty CanDeleteProperty =
+  BindableProperty.Create("CanDelete", typeof(bool), typeof(CardCreatorPage), null);
         public bool CanDelete
         {
-            get { return _canDelete; }
-            set { _UpdateField(ref _canDelete, value); }
+            get { return (bool)GetValue(CanDeleteProperty); }
+            set { SetValue(CanDeleteProperty, value); }
         }
 
         public List<string> CardTypes
@@ -46,8 +47,6 @@ namespace Pokedex.Model
         public DelegateCommand ConfirmCommand { get; }
         public DelegateCommand DeleteCommand { get; }
         public DelegateCommand TakePhotoCommand { get; }
-
-
 
         public CardCreatorPage(PokemonCard card, INavigation navigation, bool canDelete)
         {
@@ -86,28 +85,10 @@ namespace Pokedex.Model
         {
             string newPath = await Files.SaveNewPhoto(await MediaPicker.CapturePhotoAsync());
 
-            if (newPath == "") return;
+            if (newPath == null) return;
 
             Card.ImagePath = newPath;
             Card.CroppedImage = null;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void _UpdateField<T>(ref T field, T newValue,
-            Action<T> onChangedCallback = null,
-            [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, newValue))
-            {
-                return;
-            }
-
-            T oldValue = field;
-
-            field = newValue;
-            onChangedCallback?.Invoke(oldValue);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

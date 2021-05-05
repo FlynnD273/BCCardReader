@@ -12,6 +12,7 @@ using Tesseract;
 using XLabs.Ioc;
 using AForge.Imaging;
 using System;
+using System.Globalization;
 
 namespace Pokedex.Cards
 {
@@ -125,32 +126,33 @@ namespace Pokedex.Cards
                     }
                     CroppedImage = null;
 
-                    //int y = 0;
-                    //UnmanagedImage im = UnmanagedImage.FromManagedImage(cropped);
-                    //ShimDrawing::System.Drawing.Color startCol = im.GetPixel(im.Width / 2, 5);
-                    //int threshold = 20;
-
-                    //for (y = 0; y < im.Height / 2; y++)
-                    //{
-                    //    ShimDrawing::System.Drawing.Color col = im.GetPixel(im.Width / 2, y);
-                    //    if (Math.Abs(col.R - startCol.R) > threshold || Math.Abs(col.G - startCol.G) > threshold || Math.Abs(col.B - startCol.B) > threshold)
-                    //    {
-                    //        break;
-                    //    }
-                    //}
-
                     if (!TesseractApi.Initialized)
                     {
                         await TesseractApi.Init("eng");
                     }
 
-                    TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.4), (int)(cropped.Height * 0.064)));
+                    TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.35), (int)(cropped.Height * 0.064)));
                     TesseractApi.SetWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
                     if (await TesseractApi.SetImage(File.OpenRead(Path.ChangeExtension(ImagePath, "card"))))
                     {
                         string s = TesseractApi.Text;
+
                         if (Name == "")
                         {
+                            if (s != "")
+                            {
+                                if (s != "" && s[0].ToString() == s[0].ToString().ToLower())
+                                {
+                                    s = s.Substring(1, s.Length - 1);
+                                }
+                                TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                                s = textInfo.ToTitleCase(s.ToLower());
+                            }
+                            else
+                            {
+                                s = "NO TEXT DETECTED";
+                            }
+
                             Name = s;
                         }
                     }

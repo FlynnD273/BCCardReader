@@ -14,6 +14,7 @@ using Xamarin.Forms;
 namespace Pokedex.Cards
 {
     [XmlRoot(ElementName = "root", Namespace = "")]
+    //[Serializable]
     [DataContract]
     public class PokemonCard : PlayingCardBase
     {
@@ -33,8 +34,7 @@ namespace Pokedex.Cards
 
         public PokemonCard(PokemonCardType type, string imagePath, string name) : base(imagePath, name)
         {
-            _loadingImage = "Pokedex.Images.pokeshake.gif";
-
+            _loadingImage = "Pokedex.Images.pokeball.gif";
             Type = type;
         }
 
