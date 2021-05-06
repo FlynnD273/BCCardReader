@@ -12,7 +12,7 @@ using Image = AForge.Imaging.Image;
 
 
 
-namespace Pokedex.Model
+namespace Pokedex.Util
 {
     static class ImageProcessor
     {
@@ -23,56 +23,57 @@ namespace Pokedex.Model
             return Image.Clone(bitmap, PixelFormat.Format24bppRgb);
         }
 
-        public static Bitmap Format8bpp(Bitmap bitmap)
-        {
-            return Image.Clone(bitmap, PixelFormat.Format8bppIndexed);
-        }
-
         private static Bitmap _Preprocess(Bitmap bitmap)
         {
-            Bitmap grayImage = Grayscale.CommonAlgorithms.RMY.Apply(Format(bitmap));
+            FiltersSequence filters = new FiltersSequence();
+            filters.Add(new EuclideanColorFiltering()
+            {
+                CenterColor = _GetAverageColor(new Crop(new Rectangle(0, 0, bitmap.Width, bitmap.Height / 10)).Apply(Format(bitmap))),
+                Radius = 50,
+                FillOutside = true
+            });
 
-            GaussianBlur blurFilter = new GaussianBlur()
+            filters.Add(new GaussianBlur()
             {
                 ProcessAlpha = false,
                 Size = 15,
-            };
-
-            FiltersSequence filters = new FiltersSequence();
-            filters.Add(new Threshold((int)_GetAverageValue(new Crop(new Rectangle(0, 0, bitmap.Width, bitmap.Height / 10)).Apply(grayImage)) + 20));
-            filters.Add(blurFilter);
+            });
+            filters.Add(Grayscale.CommonAlgorithms.BT709);
             filters.Add(new CannyEdgeDetector());
             filters.Add(new Dilatation());
-            return filters.Apply(grayImage);
+
+            return filters.Apply(Format(bitmap));
         }
 
-        private static double _GetAverageValue(Bitmap bitmap)
+        private static RGB _GetAverageColor(Bitmap bitmap)
         {
             using (UnmanagedImage bmp = UnmanagedImage.FromManagedImage(bitmap))
             {
                 Color tempColor;
-                double v = 0;
+                double r = 0, g = 0, b = 0;
                 for (int i = 0; i < bmp.Height; i++)
                 {
                     for (int j = 0; j < bmp.Width; j++)
                     {
                         tempColor = bmp.GetPixel(j, i);
-                        v += tempColor.R;
-                        v += tempColor.G;
-                        v += tempColor.B;
+                        r += tempColor.R;
+                        g += tempColor.G;
+                        b += tempColor.B;
                     }
                 }
+                int scale = bmp.Height * bmp.Width;
+                r /= scale;
+                g /= scale;
+                b /= scale;
 
-                v /= bmp.Height * bmp.Width * 3;
-                return v;
+                return new RGB((byte)r, (byte)g, (byte)b);
             }
         }
 
         public static Bitmap FindPlayingCard(Bitmap bitmap)
         {
-            var b = Format(bitmap);
             //return _Preprocess(b);
-            return _CropToQuad(b, _GetLargestBlob(_FindQuads(_Preprocess(b))));
+            return _CropToQuad(Format(bitmap), _GetLargestBlob(_FindQuads(_Preprocess(bitmap))));
         }
 
         private static Bitmap _CropToQuad(Bitmap bitmap, List<IntPoint> corners)

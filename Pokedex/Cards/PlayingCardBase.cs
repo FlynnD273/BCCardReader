@@ -5,14 +5,11 @@ using Xamarin.Forms;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using Utils.Model;
-using Pokedex.Model;
 using System.Threading.Tasks;
-using Utils.Command;
 using Tesseract;
 using XLabs.Ioc;
-using AForge.Imaging;
-using System;
 using System.Globalization;
+using Pokedex.Util;
 
 namespace Pokedex.Cards
 {
@@ -64,7 +61,7 @@ namespace Pokedex.Cards
                     {
                         _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
                     }
-                    else if (cropTask == null || cropTask.IsCompleted && !IsCropped)
+                    else if (cropTask == null || cropTask.IsCompleted || cropTask.IsFaulted || cropTask.IsCanceled && !IsCropped)
                     {
                         cropTask = Task.Run(_CropImage);
                     }
@@ -80,12 +77,13 @@ namespace Pokedex.Cards
             set { _UpdateField(ref _croppedImage, value); }
         }
 
-        private bool _isCropped;
+        private bool _isCropped = true;
+
         [DataMember]
         public bool IsCropped
         {
             get { return _isCropped; }
-            set { _UpdateField(ref _isCropped, value, o => _croppedImage = null); }
+            set { _UpdateField(ref _isCropped, value, o => CroppedImage = null); }
         }
 
         private string _name;
@@ -151,7 +149,7 @@ namespace Pokedex.Cards
                 await TesseractApi.Init("eng");
             }
 
-            TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.35), (int)(cropped.Height * 0.064)));
+            TesseractApi.SetRectangle(new Tesseract.Rectangle((int)(cropped.Width * 0.24), 10, (int)(cropped.Width * 0.35), (int)(cropped.Height * 0.065)));
             TesseractApi.SetWhitelist("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
             if (await TesseractApi.SetImage(File.OpenRead(Path.ChangeExtension(ImagePath, "card"))))
             {
