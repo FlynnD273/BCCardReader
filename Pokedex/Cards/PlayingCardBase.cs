@@ -17,7 +17,7 @@ namespace Pokedex.Cards
     [DataContract]
     public class PlayingCardBase : NotifyPropertyChangedBase
     {
-        protected string _loadingImage = "";
+        protected virtual string PlaceHolderResourcePath => "";
 
         private static ITesseractApi _tesseractApi;
         protected static ITesseractApi TesseractApi
@@ -49,7 +49,25 @@ namespace Pokedex.Cards
         }
 
         private Task cropTask;
-        private bool _isPlaceholder;
+
+        private bool _isPlaceHolderBacking;
+        private bool _isPlaceholder 
+        {
+            get
+            {
+                if (_IsCroppingDone())
+                {
+                    _isPlaceHolderBacking = false;
+                }
+               return _isPlaceHolderBacking;
+            }
+
+            set
+            {
+                _isPlaceHolderBacking = value;
+            }
+        }
+
         private ImageSource _croppedImage;
         public ImageSource CroppedImage
         {
@@ -61,7 +79,7 @@ namespace Pokedex.Cards
                     {
                         _croppedImage = ImageSource.FromFile(Path.ChangeExtension(_imagePath, "card"));
                     }
-                    else if (cropTask == null || cropTask.IsCompleted || cropTask.IsFaulted || cropTask.IsCanceled && !IsCropped)
+                    else if (_IsCroppingDone() && IsCropped)
                     {
                         cropTask = Task.Run(_CropImage);
                     }
@@ -76,6 +94,8 @@ namespace Pokedex.Cards
 
             set { _UpdateField(ref _croppedImage, value); }
         }
+
+        private bool _IsCroppingDone () => cropTask == null || cropTask.IsCompleted || cropTask.IsFaulted || cropTask.IsCanceled;
 
         private bool _isCropped = true;
 
@@ -123,7 +143,7 @@ namespace Pokedex.Cards
         private async void _CropImage()
         {
             _isPlaceholder = true;
-            CroppedImage = ImageSource.FromStream(() => Util.Files.GetResourceStream(_loadingImage));
+            CroppedImage = ImageSource.FromStream(() => Util.Files.GetResourceStream(PlaceHolderResourcePath));
 
             using (Bitmap img = (Bitmap)ShimDrawing::System.Drawing.Image.FromStream(File.OpenRead(ImagePath)))
             using (Bitmap cropped = ImageProcessor.FindPlayingCard(img))
@@ -134,12 +154,12 @@ namespace Pokedex.Cards
                     {
                         cropped.Save(writer, ShimDrawing::System.Drawing.Imaging.ImageFormat.Jpeg);
                     }
-                    CroppedImage = null;
                     await _GetText(cropped);
                 }
             }
 
             _isPlaceholder = false;
+            CroppedImage = null;
         }
 
         private async Task _GetText(Bitmap cropped)

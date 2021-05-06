@@ -14,10 +14,11 @@ using Xamarin.Forms;
 namespace Pokedex.Cards
 {
     [XmlRoot(ElementName = "root", Namespace = "")]
-    //[Serializable]
     [DataContract]
     public class PokemonCard : PlayingCardBase
     {
+        protected override string PlaceHolderResourcePath => "Pokedex.Images.Pokeshake.gif";
+
         private PokemonCardType _type;
 
         [DataMember]
@@ -27,14 +28,10 @@ namespace Pokedex.Cards
             set { _UpdateField(ref _type, value); }
         }
 
-        PokemonCard() : base()
-        {
-            _loadingImage = "Pokedex.Images.pokeshake.gif";
-        }
+        PokemonCard() : base() { }
 
         public PokemonCard(PokemonCardType type, string imagePath, string name) : base(imagePath, name)
         {
-            _loadingImage = "Pokedex.Images.pokeshake.gif";
             Type = type;
         }
 

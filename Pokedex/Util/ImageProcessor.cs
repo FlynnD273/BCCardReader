@@ -28,8 +28,9 @@ namespace Pokedex.Util
             FiltersSequence filters = new FiltersSequence();
             filters.Add(new EuclideanColorFiltering()
             {
-                CenterColor = _GetAverageColor(new Crop(new Rectangle(0, 0, bitmap.Width, bitmap.Height / 10)).Apply(Format(bitmap))),
-                Radius = 50,
+                CenterColor = _GetAverageColor(new Crop(new Rectangle(0, 0, bitmap.Width, bitmap.Height / 50 + 2)).Apply(Format(bitmap))),
+                Radius = 40,
+                FillColor = new RGB(255, 255, 255),
                 FillOutside = true
             });
 
@@ -72,7 +73,7 @@ namespace Pokedex.Util
 
         public static Bitmap FindPlayingCard(Bitmap bitmap)
         {
-            //return _Preprocess(b);
+            //return _Preprocess(bitmap);
             return _CropToQuad(Format(bitmap), _GetLargestBlob(_FindQuads(_Preprocess(bitmap))));
         }
 
