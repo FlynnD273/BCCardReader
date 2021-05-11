@@ -17,7 +17,7 @@ namespace Pokedex.Cards
     [DataContract]
     public class PokemonCard : PlayingCardBase
     {
-        protected override string PlaceHolderResourcePath => "Pokedex.Images.Pokeshake.gif";
+        protected override string PlaceHolderResourcePath => "Pokedex.Images.pokeshake.gif";
 
         private PokemonCardType _type;
 

@@ -16,6 +16,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shim", "Shim", "{E99FF950-4DC4-46F0-BBD5-E1D05003422B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{459F16A4-085E-47BD-89DF-6984EEBE13D2}"
+	ProjectSection(SolutionItems) = preProject
+		Shim\_Droid\bin\Commercial\Shim.Drawing.dll = Shim\_Droid\bin\Commercial\Shim.Drawing.dll
+		Shim\_Droid\bin\Commercial\Shim.Drawing.pdb = Shim\_Droid\bin\Commercial\Shim.Drawing.pdb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unified", "Unified", "{975DE929-48CA-4433-8B39-59EFB83FD2CE}"
+	ProjectSection(SolutionItems) = preProject
+		Shim\_Unified\bin\Commercial\Shim.Drawing.dll = Shim\_Unified\bin\Commercial\Shim.Drawing.dll
+		Shim\_Unified\bin\Commercial\Shim.Drawing.dll.mdb = Shim\_Unified\bin\Commercial\Shim.Drawing.dll.mdb
+		Shim\_Unified\bin\Commercial\Shim.Drawing.pdb = Shim\_Unified\bin\Commercial\Shim.Drawing.pdb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -223,6 +238,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{459F16A4-085E-47BD-89DF-6984EEBE13D2} = {E99FF950-4DC4-46F0-BBD5-E1D05003422B}
+		{975DE929-48CA-4433-8B39-59EFB83FD2CE} = {E99FF950-4DC4-46F0-BBD5-E1D05003422B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F68D913C-C52C-4147-A145-5398BD758026}

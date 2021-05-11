@@ -23,11 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Amporis.Xamarin.Forms.ColorPicker" Version="1.0.23" />
-		<PackageReference Include="portable.aforge.imaging" Version="2.2.5.50526" />
-		<PackageReference Include="shim.drawing" Version="3.0.1">
-			<Aliases>ShimDrawing,%(Aliases)</Aliases>
-		</PackageReference>
+		<PackageReference Include="portable.aforge.imaging" Version="2.2.5.60302" />
 		<PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
 		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
@@ -40,6 +36,13 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Shim.Drawing">
+	    <HintPath>..\Shim\_Unified\bin\Commercial\Shim.Drawing.dll</HintPath>
+	    <Aliases>ShimDrawing</Aliases>
+	  </Reference>
 	</ItemGroup>
 
 	<ItemGroup>
