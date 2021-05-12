@@ -9,7 +9,7 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 
-		<Image Grid.Column="1" Source="{e:ImageResource Pokedex.Image.pikachu.png}" 
+		<Image Grid.Column="1" Source="{e:ImageResource Pokedex.Images.pikachu.png}" 
 						 HeightRequest="100" HorizontalOptions="Fill" BackgroundColor="{StaticResource Fire}"/>
 	</Grid>
 </ContentView>

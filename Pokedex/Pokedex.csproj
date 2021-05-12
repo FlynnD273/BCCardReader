@@ -1,51 +1,60 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Image\Pikachu.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Images\pikachu.png" />
+		<None Remove="Images\PokeShake.gif" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Image\pikachu.png" />
-    <EmbeddedResource Include="Images\pokeball.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Images\pikachu.png" />
+		<EmbeddedResource Include="Images\pokeball.png" />
+		<EmbeddedResource Include="Images\pokeshake.gif" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Amporis.Xamarin.Forms.ColorPicker" Version="1.0.23" />
-    <PackageReference Include="portable.aforge.imaging" Version="2.2.5.50526" />
-    <PackageReference Include="shim.drawing" Version="3.0.1">
-      <Aliases>ShimDrawing,%(Aliases)</Aliases>
-    </PackageReference>
-    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="portable.aforge.imaging" Version="2.2.5.60302" />
+		<PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+		<PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+		<PackageReference Include="Xamarin.Tesseract" Version="0.3.4" />
+		<PackageReference Include="XLabs.IoC" Version="2.0.5782" />
+		<PackageReference Include="XLabs.IoC.TinyIoC" Version="2.0.5782" />
+		<PackageReference Include="XLabs.Platform" Version="2.0.5782" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Utils\Utils.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Utils\Utils.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Banner.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="CardCreatorPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="CardViewCell.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+	  <Reference Include="Shim.Drawing">
+	    <HintPath>..\Shim\_Unified\bin\Commercial\Shim.Drawing.dll</HintPath>
+	    <Aliases>ShimDrawing</Aliases>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Banner.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="PokemonCardCreatorPage.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="CardViewCell.xaml">
+			<Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>

@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1566: Error reading resource 'Pokedex.Image.pikachu.png' -- 'Could not find a part of the path 'C:\Users\Flynn\source\repos\BCCardReader\Pokedex\Image\pikachu.png'.'
+dotnet_diagnostic.CS1566.severity = warning
