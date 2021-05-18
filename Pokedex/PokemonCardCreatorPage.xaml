@@ -13,22 +13,28 @@
 
 	<ScrollView Orientation="Vertical">
 		<StackLayout Orientation="Vertical">
-			<Button Text="Delete" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
+			<Button Text="Delete" TextColor="Black" Command="{Binding DeleteCommand}" HorizontalOptions="End" IsVisible="{Binding CanDelete}"/>
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<Button Text="Take Photo" Command="{Binding TakePhotoCommand}"/>
-				<Button Grid.Column="1" Text="Toggle Original" Command="{Binding ToggleCropCommand}"/>
+				<Button Text="Take New Photo" TextColor="Black" Command="{Binding TakePhotoCommand}"/>
+				<Button Grid.Column="1" TextColor="Black" Text="Use Original Photo" Command="{Binding ToggleCropCommand}">
+					<Button.Triggers>
+						<DataTrigger TargetType="Button" Binding="{Binding Card.IsCropped}" Value="False">
+							<Setter Property="Text" Value="Use Cropped Photo"/>
+						</DataTrigger>
+					</Button.Triggers>
+				</Button>
 			</Grid>
 
 			<ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" 
 						BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"
 						HeightRequest="192" CacheType="None" CacheDuration="0"/>
-			<Entry Placeholder="Title" Text="{Binding Card.Name}"/>
-			<Picker ItemsSource="{Binding CardTypes}" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
-			<Button Text="Confirm" Command="{Binding ConfirmCommand}"/>
+			<Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}"/>
+			<Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
+			<Button Text="Confirm" TextColor="Black" Command="{Binding ConfirmCommand}"/>
 		</StackLayout>
 	</ScrollView>
 </ContentPage>

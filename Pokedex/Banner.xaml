@@ -9,6 +9,8 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 
+		<Rectangle BackgroundColor="White" VerticalOptions="Center" HorizontalOptions="Fill" HeightRequest="40"/>
+
 		<Image Grid.Column="1" Source="{e:ImageResource Pokedex.Images.pikachu.png}" 
 						 HeightRequest="100" HorizontalOptions="Fill" BackgroundColor="{StaticResource Fire}"/>
 	</Grid>
