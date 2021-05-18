@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using Pokedex.Cards;
 using Pokedex.Util;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Pokedex.Model
 {
@@ -22,24 +23,19 @@ namespace Pokedex.Model
 
         private ObservableCollection<PokemonCard> _cards { get; } = new ObservableCollection<PokemonCard>();
 
-        private Func<PokemonCard, string> _sort;
-        public Func<PokemonCard, string> Sort
+        public Func<PokemonCard, string> Sort { get => _sortDict[SortBy[_sortIndex]]; }
+
+        private Dictionary<string, Func<PokemonCard, string>> _sortDict = new Dictionary<string, Func<PokemonCard, string>>();
+
+        public string[] SortBy { get => _sortDict.Keys.ToArray(); }
+
+        private int _sortIndex;
+        public int SortIndex
         {
-            get { return _sort; }
-            set { _UpdateField(ref _sort, value, o => _UpdateCards()); }
+            get { return _sortIndex; }
+            set { _UpdateField(ref _sortIndex, value, _UpdateSort); }
         }
 
-        private void _UpdateCards()
-        {
-            if (_cards.Count > 0)
-            {
-                SortedCards = _cards.OrderBy(Sort).ToArray();
-            }
-            else
-            {
-                SortedCards = new PokemonCard[0];
-            }
-        }
 
         private PokemonCard[] _sortedCards;
         public PokemonCard[] SortedCards
@@ -57,7 +53,9 @@ namespace Pokedex.Model
             CreateCardCommand = new DelegateCommand(_CreateCard);
 
             //_cards.CollectionChanged += (o, a) => _UpdateCards();
-            Sort = o => o.Name;
+            _sortDict.Add("Name", o => o.Name);
+            _sortDict.Add("Type", o => o.Type.ToString());
+
 
             dbPath = Path.Combine(workingPath, "cardsdb.xml");
 
@@ -67,7 +65,7 @@ namespace Pokedex.Model
                 try
                 {
                     _cards = (ObservableCollection<PokemonCard>)xmlSerializer.ReadObject(new XmlTextReader(dbPath));
-                    _UpdateCards();
+                    _UpdateSort();
                 }
                 catch (SerializationException e)
                 {
@@ -79,28 +77,32 @@ namespace Pokedex.Model
                 _cards.Clear();
                 _UpdateDatabase();
             }
+        }
 
-            //if (Cards.Count > 0)
-            //{
-            //    PlayingCardBase c = Cards[0];
-            //    Cards.Clear();
-
-            //    for (int i = 0; i < 11; i++)
-            //    {
-            //        Cards.Add(new PlayingCardBase((CardType)i, c.ImagePath, i.ToString()));
-            //    }
-
-            //    Cards.Remove(c);
-
-            //    _UpdateDatabase();
-            //}
+        private void _UpdateSort(int o = default)
+        {
+            if (_cards.Count > 0)
+            {
+                if (SortBy[SortIndex] == "Type")
+                {
+                    SortedCards = _cards.OrderBy(Sort).ThenBy(obj => obj.Name).ToArray();
+                }
+                else
+                {
+                    SortedCards = _cards.OrderBy(Sort).ToArray();
+                }
+            }
+            else
+            {
+                SortedCards = new PokemonCard[0];
+            }
         }
 
         private async void _DbError()
         {
             await DisplayAlert("Error", "There was an error reading the database. If you add a card, all previous card data will be lost.", "OK");
             _cards.Clear();
-            _UpdateCards();
+            _UpdateSort();
         }
 
         private async void _CreateCard()
@@ -113,7 +115,7 @@ namespace Pokedex.Model
             }
             catch (IOException e)
             {
-                DisplayAlert("ERROR", e.Message, "OK");
+                await DisplayAlert("ERROR", e.Message, "OK");
             }
 
             if (path == null)
@@ -172,7 +174,7 @@ namespace Pokedex.Model
             {
                 xmlSerializer.WriteObject(fs, _cards);
             }
-            _UpdateCards();
+            _UpdateSort();
         }
     }
 }

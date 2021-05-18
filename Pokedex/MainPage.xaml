@@ -16,6 +16,17 @@
 
 		<l:Banner/>
 
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+
+			<Label Text="Sort By: " TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
+			<Picker Grid.Column="1" ItemsSource="{Binding SortBy}" SelectedIndex="{Binding SortIndex}" VerticalOptions="Center"/>
+		</Grid>
+
 		<ListView Grid.Row="1" ItemsSource="{Binding SortedCards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
 			<ListView.ItemTemplate>
 				<DataTemplate>
