@@ -34,7 +34,7 @@
 						HeightRequest="192" CacheType="None" CacheDuration="0"/>
 			<Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}"/>
 			<Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}"/>
-			<Button Text="Confirm" TextColor="Black" Command="{Binding ConfirmCommand}"/>
+			<Button Text="Confirm" TextColor="Black" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}"/>
 		</StackLayout>
 	</ScrollView>
 </ContentPage>

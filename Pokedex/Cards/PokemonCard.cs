@@ -43,16 +43,16 @@ namespace Pokedex.Cards
 
     public enum PokemonCardType
     {
-        Grass,
-        Fire,
-        Water,
-        Lightning,
-        Psychic,
-        Fighting,
-        Darkness,
-        Metal,
         Colorless,
-        Fairy,
+        Darkness,
         Dragon,
+        Fairy,
+        Fighting,
+        Fire,
+        Grass,
+        Lightning,
+        Metal,
+        Psychic,
+        Water,
     }
 }

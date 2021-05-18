@@ -48,32 +48,42 @@ namespace Pokedex.Cards
             }
         }
 
-        private Task cropTask;
+        private Task _cropTask;
 
-        private bool _isPlaceHolderBacking;
-        private bool _isPlaceholder 
+        private bool _isPlaceHolder;
+        public bool IsPlaceholder 
         {
             get
             {
                 if (_IsCroppingDone())
                 {
-                    _isPlaceHolderBacking = false;
+                    _UpdateField(ref _isPlaceHolder, false);
+                    IsNotPlaceholder = true;
                 }
-               return _isPlaceHolderBacking;
+                return _isPlaceHolder;
             }
 
             set
             {
-                _isPlaceHolderBacking = value;
+                _UpdateField(ref _isPlaceHolder, value);
+                IsNotPlaceholder = !value;
             }
         }
+
+        private bool _isNotPlaceholder;
+        public bool IsNotPlaceholder
+        {
+            get { return _isNotPlaceholder; }
+            set { _UpdateField(ref _isNotPlaceholder, value); }
+        }
+
 
         private ImageSource _croppedImage;
         public ImageSource CroppedImage
         {
             get
             {
-                if (_croppedImage == null || _isPlaceholder)
+                if (_croppedImage == null || IsPlaceholder)
                 {
                     if (IsCropped && File.Exists(Path.ChangeExtension(_imagePath, "card")))
                     {
@@ -81,7 +91,7 @@ namespace Pokedex.Cards
                     }
                     else if (_IsCroppingDone() && IsCropped)
                     {
-                        cropTask = Task.Run(_CropImage);
+                        _cropTask = Task.Run(_CropImage);
                     }
                     else if (!IsCropped)
                     {
@@ -92,10 +102,13 @@ namespace Pokedex.Cards
                 return _croppedImage;
             }
 
-            set { _UpdateField(ref _croppedImage, value); }
+            set 
+            { 
+                _UpdateField(ref _croppedImage, value); 
+            }
         }
 
-        private bool _IsCroppingDone () => cropTask == null || cropTask.IsCompleted || cropTask.IsFaulted || cropTask.IsCanceled;
+        private bool _IsCroppingDone () => _cropTask == null || _cropTask.IsCompleted || _cropTask.IsFaulted || _cropTask.IsCanceled;
 
         private bool _isCropped = true;
 
@@ -142,7 +155,7 @@ namespace Pokedex.Cards
 
         private async void _CropImage()
         {
-            _isPlaceholder = true;
+            IsPlaceholder = true;
             CroppedImage = ImageSource.FromStream(() => Util.Files.GetResourceStream(PlaceHolderResourcePath));
 
             using (Bitmap img = (Bitmap)ShimDrawing::System.Drawing.Image.FromStream(File.OpenRead(ImagePath)))
@@ -158,7 +171,7 @@ namespace Pokedex.Cards
                 }
             }
 
-            _isPlaceholder = false;
+            IsPlaceholder = false;
             CroppedImage = null;
         }
 

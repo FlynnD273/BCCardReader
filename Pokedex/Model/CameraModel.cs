@@ -158,7 +158,11 @@ namespace Pokedex.Model
             }
             else
             {
-                _cards[_cards.IndexOf(card)] = old;
+                var index = _cards.IndexOf(card);
+                if (index > 0)
+                {
+                    _cards[index] = old;
+                }
             }
         }
 
