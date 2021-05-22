@@ -28,10 +28,10 @@ namespace Pokedex.Cards
             set { _UpdateField(ref _type, value); }
         }
 
-        private int _healthPoints;
+        private int? _healthPoints;
 
         [DataMember]
-        public int HealthPoints
+        public int? HealthPoints
         {
             get { return _healthPoints; }
             set { _UpdateField(ref _healthPoints, value); }
