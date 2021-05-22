@@ -5,36 +5,41 @@
 						 xmlns:l="clr-namespace:Pokedex"
 						 xmlns:c="clr-namespace:Pokedex.Converter"
 						 xmlns:m="clr-namespace:Pokedex.Model">
-	<ContentPage.Resources>
-	</ContentPage.Resources>
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+    <ContentPage.Resources>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-		<l:Banner/>
+        <l:Banner/>
+        <Label Text="Welcome Trainer!" FontSize="Large" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold"></Label>
 
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
 
-			<Label Text="Sort By: " TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"/>
-			<Picker Grid.Column="1" ItemsSource="{Binding SortBy}" SelectedIndex="{Binding SortIndex}" VerticalOptions="Center"/>
-		</Grid>
+            </Grid.ColumnDefinitions>
 
-		<ListView Grid.Row="1" ItemsSource="{Binding SortedCards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<l:CardViewCell/>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
+            <Label Text="Sort by:" TextColor="White" VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="EndAndExpand" FontSize="Large" HorizontalTextAlignment="Center"/>
+            <Picker Grid.Column="1" ItemsSource="{Binding SortBy}" TextColor="White" SelectedIndex="{Binding SortIndex}"  VerticalOptions="CenterAndExpand" FontSize="Large" 
+                        HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End" />
+        </Grid>
 
-		<Button Grid.Row="2" Text="Add Card" Command="{Binding CreateCardCommand}"/>
-	</Grid>
+        <ListView Grid.Row="1" ItemsSource="{Binding SortedCards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <l:CardViewCell/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Grid.Row="2" Text="Add Card" TextColor="White" Command="{Binding CreateCardCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#323638" />
+    </Grid>
 </ContentPage>

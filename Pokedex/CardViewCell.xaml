@@ -17,19 +17,35 @@
 	Fairy,
 	Dragon,
   -->
-	<ViewCell.View>
-		<Grid BackgroundColor="{Binding Type, Converter={StaticResource EnumColorConverter}}">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<ffimageloading:CachedImage 
+    <ViewCell.View>
+
+        <Grid BackgroundColor="{Binding Type, Converter={StaticResource EnumColorConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <AbsoluteLayout>
+
+                <ffimageloading:CachedImage 
 								Source="{Binding CroppedImage}"
 								CacheDuration= "50"
 								RetryCount= "3"
 								RetryDelay= "100"
-								DownsampleToViewSize = "true"/>
-			<Label Grid.Row="1" Padding="5, 0, 5, 0" Text="{Binding Name}" HorizontalOptions="Center" BackgroundColor="White" TextColor="Black" FontSize="Medium"/>
-		</Grid>
-	</ViewCell.View>
+								DownsampleToViewSize = "true"
+								VerticalOptions="Center"/>
+
+
+                <Label Grid.Column="1"   Text= "{Binding Name}" BackgroundColor="Transparent" TextColor="White" FontSize="Large" HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Center" 
+                     AbsoluteLayout.LayoutBounds="0.9, 0.0, 1, 1.0"
+                     FontAttributes="Bold" VerticalOptions="StartAndExpand" AbsoluteLayout.LayoutFlags="All"/>
+
+
+                <Label Grid.Column="2" Text="{Binding HP}" BackgroundColor="Transparent" TextColor="White" FontSize="Medium" HorizontalOptions="EndAndExpand" 
+                     FontAttributes="Bold"  VerticalOptions="CenterAndExpand" AbsoluteLayout.LayoutBounds="0.8,0.1,1,2"
+					AbsoluteLayout.LayoutFlags="PositionProportional"/>
+            </AbsoluteLayout>
+
+        </Grid>
+    </ViewCell.View>
 </ViewCell>
