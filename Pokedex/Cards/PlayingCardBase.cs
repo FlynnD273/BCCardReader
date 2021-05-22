@@ -55,7 +55,7 @@ namespace Pokedex.Cards
         {
             get
             {
-                if (_IsCroppingDone())
+                if (!IsCropped || _IsCroppingDone())
                 {
                     _UpdateField(ref _isPlaceHolder, false);
                     IsNotPlaceholder = true;

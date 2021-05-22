@@ -5,52 +5,44 @@
 						 xmlns:c="clr-namespace:Pokedex.Converter"
 						 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 						 x:Class="Pokedex.Model.PokemonCardCreatorPage">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <c:IntEnumConverter x:Key="IntEnum"/>
-            <c:EnumColorConverter x:Key="EnumColor"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<c:IntEnumConverter x:Key="IntEnum"/>
+			<c:EnumColorConverter x:Key="EnumColor"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
 
 
-    <ScrollView Orientation="Vertical">
-        <StackLayout Orientation="Vertical">
-            <Grid>
+	<ScrollView Orientation="Vertical">
+		<StackLayout Orientation="Vertical">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Button Text="Take New Photo" TextColor="White" Command="{Binding TakePhotoCommand}" BackgroundColor="#323638" />
+				<Button Grid.Column="1" TextColor="White" Text="Use Original Photo" Command="{Binding ToggleCropCommand}" BackgroundColor="#323638" >
+					<Button.Triggers>
+						<DataTrigger TargetType="Button" Binding="{Binding Card.IsCropped}" Value="False">
+							<Setter Property="Text" Value="Use Cropped Photo"/>
+						</DataTrigger>
+					</Button.Triggers>
+				</Button>
+			</Grid>
 
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-
-                <Button Text="Take New Photo" TextColor="White" Command="{Binding TakePhotoCommand}" BackgroundColor="#323638" />
-                <Button Grid.Column="1" TextColor="White" Text="Use Original Photo" Command="{Binding ToggleCropCommand}" BackgroundColor="#323638" >
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding Card.IsCropped}" Value="False">
-                            <Setter Property="Text" Value="Use Cropped Photo"/>
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>
-            </Grid>
-
-            <ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" 
-						BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"
+			<ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}"
 						HeightRequest="192" CacheType="None" CacheDuration="0"/>
-            <Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
-            <Entry Placeholder="HP" TextColor="Black" Text="{Binding Card.HP}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
-            <Entry Placeholder="Nuzzle" TextColor="Black" Text="{Binding Card.Nuzzle}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+			<Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+			<Entry Placeholder="HP" TextColor="Black" Text="{Binding Card.HealthPoints, Mode=OneWay}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
 
-            <Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
-            <Button Text="Confirm" TextColor="White" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}" BackgroundColor="#323638" />
-            <Button Text="Delete" TextColor="White" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#323638"  />
-
-        </StackLayout>
-    </ScrollView>
+			<Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+			<Button Text="Confirm" TextColor="White" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}" BackgroundColor="#323638" />
+			<Button Text="Delete" TextColor="White" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#323638"  />
+		</StackLayout>
+	</ScrollView>
 </ContentPage>

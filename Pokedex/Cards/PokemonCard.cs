@@ -28,6 +28,16 @@ namespace Pokedex.Cards
             set { _UpdateField(ref _type, value); }
         }
 
+        private int _healthPoints;
+
+        [DataMember]
+        public int HealthPoints
+        {
+            get { return _healthPoints; }
+            set { _UpdateField(ref _healthPoints, value); }
+        }
+
+
         PokemonCard() : base() { }
 
         public PokemonCard(PokemonCardType type, string imagePath, string name) : base(imagePath, name)
