@@ -124,7 +124,7 @@ namespace Pokedex.Model
             }
 
             //Edit the card
-            var creatorPage = new PokemonCardCreatorPage(new PokemonCard(PokemonCardType.Colorless, path, ""), Navigation, canDelete: false);
+            var creatorPage = new PokemonCardCreatorPage(new PokemonCard(path), Navigation, canDelete: false);
 
             await Navigation.PushModalAsync(creatorPage);
 

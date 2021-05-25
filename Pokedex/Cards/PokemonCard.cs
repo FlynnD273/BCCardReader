@@ -40,14 +40,17 @@ namespace Pokedex.Cards
 
         PokemonCard() : base() { }
 
-        public PokemonCard(PokemonCardType type, string imagePath, string name) : base(imagePath, name)
+        public PokemonCard(PokemonCardType type, string imagePath, string name, int? Hp) : base(imagePath, name)
         {
             Type = type;
+            HealthPoints = Hp;
         }
+
+        public PokemonCard(string imagePath) : this(PokemonCardType.Colorless, imagePath, null, null) { }
 
         public override PlayingCardBase Clone()
         {
-            return new PokemonCard(Type, ImagePath, Name);
+            return new PokemonCard(Type, ImagePath, Name, HealthPoints);
         }
     }
 

@@ -48,7 +48,7 @@
 
             <ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" HeightRequest="192" CacheType="None" CacheDuration="0" BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"/>
 			<Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
-			<Entry Placeholder="HP" TextColor="Black" Text="{Binding Card.HealthPoints, Mode=OneWay}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
+			<Entry Placeholder="HP" TextColor="Black" Text="{Binding Card.HealthPoints}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
 
 			<Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
             <Button Text="Confirm" TextColor="#323638" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}" BackgroundColor="#D6D0D3" />
