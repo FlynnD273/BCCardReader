@@ -15,21 +15,21 @@
         </Grid.RowDefinitions>
 
         <l:Banner/>
-        <Label Text="Welcome Trainer!" FontSize="Large" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold"></Label>
+        <Label Text="Welcome Trainer!" FontSize="30" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold" Padding="5,7,5,5"></Label>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="25*"/>
 
             </Grid.ColumnDefinitions>
 
-            <Label Text="Sort by:" TextColor="White" VerticalOptions="CenterAndExpand" 
+            <Label Text="Sort by:" TextColor="White" VerticalOptions="CenterAndExpand" Padding="0,10,0,8"
                        HorizontalOptions="EndAndExpand" FontSize="Large" HorizontalTextAlignment="Center"/>
             <Picker Grid.Column="1" ItemsSource="{Binding SortBy}" TextColor="White" SelectedIndex="{Binding SortIndex}"  VerticalOptions="CenterAndExpand" FontSize="Large" 
-                        HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End" />
+                        HorizontalOptions="CenterAndExpand" VerticalTextAlignment="End"  />
         </Grid>
 
         <ListView Grid.Row="1" ItemsSource="{Binding SortedCards}" RowHeight="192" ItemTapped="ListView_ItemTapped" SelectionMode="None">
@@ -40,6 +40,6 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Button Grid.Row="2" Text="Add Card" TextColor="White" Command="{Binding CreateCardCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#323638" />
+        <Button Grid.Row="2" Text="Add Card" TextColor="#383637" Command="{Binding CreateCardCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#D6D0D3" FontAttributes="Bold" />
     </Grid>
 </ContentPage>

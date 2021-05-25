@@ -18,16 +18,16 @@
   -->
 	<Application.Resources>
 		<c:EnumColorConverter x:Key="EnumColorConverter"/>
-        <Color x:Key="Grass">#76BD46</Color>
+        <Color x:Key="Grass">#00DF00</Color>
         <Color x:Key="Fire">#E65316</Color>
         <Color x:Key="Water">#15D5EB</Color>
         <Color x:Key="Lightning">#FCD700</Color>
         <Color x:Key="Psychic">#D12AA3</Color>
         <Color x:Key="Fighting">#BD8F9D</Color>
-        <Color x:Key="Darkness">#AEBBC2</Color>
-        <Color x:Key="Metal">#ADABAA</Color>
+        <Color x:Key="Darkness">#B4BCD6</Color>
+        <Color x:Key="Metal">#B5B0B2</Color>
 		<Color x:Key="Colorless">#f8f5f6</Color>
         <Color x:Key="Fairy">#FCA9EC</Color>
-        <Color x:Key="Dragon">#4723B5</Color>
+        <Color x:Key="Dragon">#37FFD2</Color>
 	</Application.Resources>
 </Application>

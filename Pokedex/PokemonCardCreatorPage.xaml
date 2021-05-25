@@ -14,19 +14,30 @@
 
 
 	<ScrollView Orientation="Vertical">
-		<StackLayout Orientation="Vertical">
-			<Grid>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<Button Text="Take New Photo" TextColor="White" Command="{Binding TakePhotoCommand}" BackgroundColor="#323638" />
-				<Button Grid.Column="1" TextColor="White" Text="Use Original Photo" Command="{Binding ToggleCropCommand}" BackgroundColor="#323638" >
+	
+
+        <StackLayout Orientation="Vertical">
+
+            <Grid>
+                <l:Banner/>
+                <Label Text="Gotta catch 'em all!" FontSize="35" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="White" FontAttributes="Bold" Padding="15,8,5,5"></Label>
+
+            </Grid>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition  Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Take New Photo" TextColor="#323638" Command="{Binding TakePhotoCommand}" BackgroundColor="#D6D0D3" />
+                <Button Grid.Column="1" TextColor="#323638" Text="Use Original Photo" Command="{Binding ToggleCropCommand}" BackgroundColor="#D6D0D3">
 					<Button.Triggers>
 						<DataTrigger TargetType="Button" Binding="{Binding Card.IsCropped}" Value="False">
 							<Setter Property="Text" Value="Use Cropped Photo"/>
@@ -35,14 +46,13 @@
 				</Button>
 			</Grid>
 
-			<ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}"
-						HeightRequest="192" CacheType="None" CacheDuration="0"/>
+            <ffimageloading:CachedImage Source="{Binding Card.CroppedImage, Mode=OneWay}" HeightRequest="192" CacheType="None" CacheDuration="0" BackgroundColor="{Binding Card.Type, Converter={StaticResource EnumColor}}"/>
 			<Entry Placeholder="Title" TextColor="Black" Text="{Binding Card.Name}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
 			<Entry Placeholder="HP" TextColor="Black" Text="{Binding Card.HealthPoints, Mode=OneWay}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
 
 			<Picker ItemsSource="{Binding CardTypes}" TextColor="Black" SelectedIndex="{Binding Card.Type, Converter={StaticResource IntEnum}}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"/>
-			<Button Text="Confirm" TextColor="White" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}" BackgroundColor="#323638" />
-			<Button Text="Delete" TextColor="White" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#323638"  />
+            <Button Text="Confirm" TextColor="#323638" Command="{Binding ConfirmCommand}" IsEnabled="{Binding Card.IsNotPlaceholder}" BackgroundColor="#D6D0D3" />
+            <Button Text="Delete" TextColor="#383637" Command="{Binding DeleteCommand}" HorizontalOptions="FillAndExpand" IsVisible="{Binding CanDelete}" BackgroundColor="#D6D0D3"  />
 		</StackLayout>
 	</ScrollView>
 </ContentPage>

@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-						 xmlns:e="clr-namespace:Pokedex.Extension"
+			 xmlns:e="clr-namespace:Pokedex.Extension"
              x:Class="Pokedex.Banner">
+
     <Grid ColumnSpacing="0" Padding="10" BackgroundColor="#961C1A">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
