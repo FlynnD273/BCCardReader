@@ -17,9 +17,8 @@
 	Fairy,
 	Dragon,
   -->
-    <ViewCell.View>
-
-        <Grid BackgroundColor="{Binding Type, Converter={StaticResource EnumColorConverter}}">
+	<ViewCell.View>
+		<Grid BackgroundColor="{Binding Type, Converter={StaticResource EnumColorConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="35*"/>
                 <ColumnDefinition Width="65*"/>
@@ -32,11 +31,11 @@
             </Grid.RowDefinitions>
 
 
-            <Label Grid.Column="1" Grid.Row="0"   Text= "{Binding Name}" BackgroundColor="Transparent" TextColor="#383637" FontSize="Large" 
+                <Label Grid.Column="1" Grid.Row="0"   Text= "{Binding Name}" TextColor="#383637" FontSize="Large" 
                      FontAttributes="Bold" VerticalOptions="Start"/>
-            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Type}" BackgroundColor="Transparent" TextColor="#383637" FontSize="Medium" 
+                <Label Grid.Column="1" Grid.Row="1" Text="{Binding Type}" TextColor="#383637" FontSize="Medium" 
                      FontAttributes="Bold"  VerticalOptions="Start"/>
-            <Label Grid.Column="1" Grid.Row="2" Text="{Binding HealthPoints}" BackgroundColor="Transparent" TextColor="#383637" FontSize="Medium" 
+                <Label Grid.Column="1" Grid.Row="2" Text="{Binding HealthPoints}" TextColor="#383637" FontSize="Medium" 
                      FontAttributes="Bold"  VerticalOptions="Start"/>
 
             <ffimageloading:CachedImage 
